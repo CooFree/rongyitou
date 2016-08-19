@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/rl_top">
+        <ImageButton
+        android:id="@+id/ib_top_lf"
+        android:layout_width="50dp"
+        android:background="@null"
+        android:src="@mipmap/back"
+        android:layout_centerVertical="true"
+        android:layout_height="match_parent"
+        />
+        <TextView
+            android:id="@+id/tv_top_ct"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:text="发表简介"/>
+        <TextView
+            android:id="@+id/tv_top_rt"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+            android:textColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        android:text="发表"/>
+        <!--<ImageButton-->
+            <!--android:id="@+id/ib_top_rt"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:background="@null"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:scaleType="center"-->
+            <!--android:src="@mipmap/denglu_guanbi"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_height="match_parent"-->
+            <!--/>-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#E9E9E9"
+            android:layout_height="1dp"></View>
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/tv_content"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="left"
+        android:hint="还没有填写简介...\n
+简介示例说明：\n
+1982年生于山西\n
+2005年毕业于西安美术学院油画系\n
+现居北京\n
+个人作品展：\n
+2007年“看上去很美”周源个人作品展在北京798唯一艺术中心展出"
+        android:background="@drawable/public_brief_et_bg"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+</LinearLayout>

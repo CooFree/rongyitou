@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<module name="tenant" label="系统-商家" version="" package="com.efeiyi.ec.tenant" path="">
+
+    <entities>
+        <entity name="BigTenant" label="商家列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.BigTenant">
+            <does>
+                <do name="plistTenant" access="" label="商家分页列表"
+                    result="/tenant/tenantPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="like" label="商家名称" inputType="text"/>
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
+                    </query>
+                </do>
+                <do name="formTenant" label="保存商家" access="" result="/tenant/tenantForm"/>
+                <do name="viewTenant" label="查看商家" access="" result="/tenant/tenantView"/>
+                <do name="saveOrUpdateTenant" label="保存商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
+                    <page>
+                        <fields>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                            <field name="status" label="创建时间" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+                <do name="removeTenant" label="删除商家" access="" result="json"/>
+                <do name="listTenant" label="商家列表" access="" result="/tenant/tenantList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="0" operation="ne"/>
+                        <condition label="projectId" name="tenantProject.project.id" operation="ne"/>
+                    </query>
+                    <query name="product" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="Tenant" label="商家列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.Tenant">
+            <does>
+
+                <do name="removeTenant1" label="删除商家" access="" result="json"/>
+
+            </does>
+        </entity>
+        <entity name="PersonalTenant" label="个人商家列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.PersonalTenant">
+            <does>
+                <do name="formPersonalTenant" label="保存个人商家" access="" result="/tenantPersonal/tenantPersonalForm" execute="com.efeiyi.ec.system.tenant.controller.formTenantHandler"/>
+                <do name="formPersonTenant" label="保存个人商家" access="" result="/tenantPersonal/tenantPersonForm"/>
+                <do name="viewPersonalTenant" label="查看个人商家" access="" result="/tenantPersonal/tenantPersonalView"/>
+                <do name="saveOrUpdatePersonalTenant" label="保存个人商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
+                    <page>
+                        <fields>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                            <field name="status" label="创建时间" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+                <do name="saveOrUpdatePersonTenant" label="保存个人商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default">
+                </do>
+                <do name="removePersonalTenant" label="删除个人商家" access="" result="json"/>
+            </does>
+        </entity>
+        <entity name="PrivateTenant" label="个体商家列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.PrivateTenant">
+            <does>
+                <do name="formPrivateTenant" label="保存个体商家" access="" result="/tenantPrivate/tenantPrivateForm" execute="com.efeiyi.ec.system.tenant.controller.formTenantHandler"/>
+                <do name="formPrivaterTenant" label="保存个体商家" access="" result="/tenantPrivate/tenantPrivaterForm"/>
+                <do name="viewPrivateTenant" label="查看个体商家" access="" result="/tenantPrivate/tenantPrivateView"/>
+                <do name="saveOrUpdatePrivateTenant" label="保存个体商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
+                    <page>
+                        <fields>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                            <field name="status" label="创建时间" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+                <do name="saveOrUpdatePrivaterTenant" label="保存个体商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"/>
+                <do name="removePersonalTenant" label="删除个体商家" access="" result="json"/>
+            </does>
+        </entity>
+        <entity name="EnterpriseTenant" label="企业商家列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.EnterpriseTenant">
+            <does>
+                <do name="formEnterpriseTenant" label="保存企业商家" access="" result="/tenantEnterprise/tenantEnterpriseForm" execute="com.efeiyi.ec.system.tenant.controller.formTenantHandler"/>
+                <do name="formEnterprisesTenant" label="保存企业商家" access="" result="/tenantEnterprise/tenantEnterprisesForm"/>
+                <do name="viewEnterpriseTenant" label="查看企业商家" access="" result="/tenantEnterprise/tenantEnterpriseView"/>
+                <do name="saveOrUpdateEnterpriseTenant" label="保存个人商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
+                    <page>
+                        <fields>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                            <field name="status" label="创建时间" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+                <do name="saveOrUpdateEnterprisesTenant" label="保存企业商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"/>
+                <do name="removePersonalTenant" label="删除个人商家" access="" result="json"/>
+            </does>
+        </entity>
+        <!--<entity name="TenantBanner" label="商家轮播图列表"-->
+                <!--basic="simple" others=""-->
+                <!--model="com.ming800.core.p.model.Banner">-->
+            <!--<does>-->
+                <!--<do name="plistTenantBanner" access="" label="商家轮播图分页列表"-->
+                    <!--result="/tenantBanner/tenantBannerPList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                        <!--<condition name="group" defaultValue="efec" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+                <!--<do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm" execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>-->
+                <!--<do name="viewTenantBanner" label="查看传承人轮播图" access="" result="/tenantBanner/tenantBannerView"/>-->
+                <!--<do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">-->
+                <!--</do>-->
+                <!--<do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>-->
+                <!--<do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition label="状态" name="status" defaultValue="1" operation="eq"/>-->
+                        <!--<condition label="状态" name="tenant.id"  operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+
+            <!--</does>-->
+        <!--</entity>-->
+
+
+        <entity name="TenantMaster" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantMaster">
+            <does>
+                <do name="plistTenantMaster" access="" label="商家大师分页列表"
+                    result="/tenantMaster/tenantMasterPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formTenantMaster" label="保存商家大师" access="" result="/tenantMaster/tenantMasterForm"/>
+                <do name="saveOrUpdateTenantMaster" label="保存商家大师" access="" result="/tenantMaster/tenantMasterSaveSuccess">
+                </do>
+                <do name="removeTenantMaster" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantMaster" label="大师商家大师" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.listTenantMasterHandler"
+                    result="/tenantMaster/tenantMasterList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                        <condition label="status" name="status" defaultValue="1"  operation="eq"/>
+                        <condition label="项目" name="master.status" defaultValue="0"  operation="ne"/>
+                    </query>
+                    <query name="default1" label="默认1" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                        <!--<condition label="status" name="status" defaultValue="1"  operation="eq"/>-->
+                        <condition label="项目" name="master.status" defaultValue="0"  operation="ne"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+
+        <entity name="TenantProject" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantProject">
+            <does>
+                <do name="plistTenantProject" access="" label="商家大师分页列表"
+                    result="/tenantProject/tenantProjectPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formTenantProject" label="保存商家大师" access="" result="/tenantProject/tenantProjectForm"/>
+                <do name="saveOrUpdateTenantProject" label="保存商家大师" access="" result="/tenantProject/tenantProjectSaveSuccess">
+                </do>
+                <do name="removeTenantProject" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantProject" label="大师商家大师" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.listTenantMasterHandler"
+                    result="/tenantProject/tenantProjectList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                        <condition label="status" name="status" defaultValue="1"  operation="eq"/>
+                        <condition label="项目" name="project.status" defaultValue="0"  operation="ne"/>
+                    </query>
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                        <!--<condition label="status" name="status" defaultValue="1"  operation="eq"/>-->
+                        <condition label="项目" name="project.status" defaultValue="1"  operation="eq"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="大师" name="project.id" defaultValue="1" operation="eq"/>
+                        <condition label="大师" name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition label="项目" name="project.status" defaultValue="1"  operation="eq"/>
+                    </query>
+                    <query name="default3" label="项目管理店铺" type="auto" orderBy="id:desc">
+                        <condition label="status" name="status" defaultValue="1"  operation="eq"/>
+                        <condition label="大师" name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+
+        <entity name="TenantCategory" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantCategory">
+            <does>
+                <do name="plistTenantCategory" access="" label="商家大师分页列表"
+                    result="/tenantCategory/tenantCategoryPList" execute="com.efeiyi.ec.system.tenant.controller.SysTenantCategoryHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="viewTenantCategory" label="查看商家" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.SysTenantCategoryHandler"
+                    result="/tenantCategory/tenantCategoryView"/>
+                <do name="formTenantCategory" label="保存商家大师" access="" result="/tenantCategory/tenantCategoryForm" execute="com.efeiyi.ec.system.tenant.controller.SysTenantCategoryHandler"/>
+                <do name="saveOrUpdateTenantCategory" label="保存商家大师" access="" result="/tenantCategory/tenantCategorySaveSuccess">
+                </do>
+                <do name="removeTenantCategory" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantCategory" label="大师商家大师" access="" result="/tenantCategory/tenantCategoryList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="TenantProductTag" label="商家类别商品"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantProductTag">
+            <does>
+                <do name="plistTenantProductTag" access="" label="商家大师分页列表"
+                    result="/tenantProductTag/tenantProductTagPList"  execute="com.efeiyi.ec.system.tenant.controller.SysTenantCategoryHandler" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="viewTenantProductTag" label="查看商家" access="" result="/tenantProductTag/tenantProductTagView"/>
+                <do name="formTenantProductTag" label="保存商家大师" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.SysTenantCategoryHandler"
+                    result="/tenantProductTag/tenantProductTagForm" />
+                <do name="saveOrUpdateTenantProductTag" label="保存商家大师" access="" result="/tenantProductTag/tenantProductTagSaveSuccess">
+                </do>
+                <do name="removeTenantProductTag" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantProductTag" label="大师商家大师" access=""
+                    execute="com.efeiyi.ec.system.product.controller.plistTenantProductHandler"
+                    result="/tenantProductTag/tenantProductTagList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenantCategory.id" defaultValue="1"  operation="eq"/>
+                        <condition label="状态" name="status" defaultValue="1"  operation="eq"/>
+                        <condition label="状态" name="product.status" defaultValue="0"  operation="ne"/>
+                    </query>
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenantCategory.id" defaultValue="1"  operation="eq"/>
+                        <condition label="状态" name="product.status" defaultValue="0"  operation="ne"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+
+        <entity name="TenantReview" label="商家用户审核"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantReview">
+            <does>
+
+                <do name="formTenantReview" label="保存商家用户审核"
+                    execute="com.efeiyi.ec.system.tenant.controller.ToTenantReviewFormHandler"
+                    access="" result="/tenantReview/tenantReviewForm"/>
+                <do name="saveOrUpdateTenantReview" label="保存商家大师" access="" result="/tenantMaster/tenantMasterSaveSuccess">
+                </do>
+                <do name="listTenantReview" label="商家用户审核" access=""
+                    result="/tenantReview/tenantReviewList">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+    </entities>
+</module>

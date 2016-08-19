@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/rl_top">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:background="@null"
+            android:src="@mipmap/back"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            />
+        <TextView
+            android:id="@+id/tv_top_ct"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="@dimen/title"
+            android:text="编辑昵称"/>
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="@dimen/defult_font"
+            android:text="保存"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/defult_padding"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#E9E9E9"
+            android:layout_height="1dp"></View>
+    </RelativeLayout>
+<EditText
+    android:layout_marginTop="10dp"
+    android:id="@+id/et_nickName"
+    android:layout_width="match_parent"
+    android:layout_height="46dp"
+    android:textSize="@dimen/title"
+    android:padding="14dp"
+    android:gravity="top"
+    android:background="@drawable/public_brief_et_bg"
+    android:hint="昵称"/>
+
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <!--头部标题栏-->
+    <RelativeLayout
+        android:id="@+id/aai_rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="38dp">
+
+        <ImageView
+            android:id="@+id/aai_top_lf"
+            android:layout_width="14dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/fanhui" />
+
+
+        <TextView
+            android:id="@+id/aai_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:text="孙天骄"/>
+        <TextView
+            android:id="@+id/aai_top_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="编辑"
+            android:textColor="#4CA45C"
+            android:textSize="14sp"
+            android:layout_marginRight="14dp"
+             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="#E9E9E9"/>
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <View
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#e6e6e6"/>
+        <com.viewpagerindicator.TabPageIndicator
+            android:id="@+id/aai_indicator"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            />
+    </FrameLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/aai_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+</LinearLayout>

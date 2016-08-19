@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <title>拍卖详情</title>
+    <link href="scripts/css/semantic.min.css" rel="stylesheet">
+    <link href="scripts/css/layouts.css" rel="stylesheet">
+    <link href="scripts/css/auction.css" rel="stylesheet">
+</head>
+<body>
+
+<article class="details-rz ui creation">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <section class="swiper-slide ui  auction bd" alt="拍卖">
+
+                <!--项目图片-->
+                <div class="ui segment" id="mainPicture2">
+                </div>
+                <!--项目基本信息-->
+                <div class="ui bd infobase" id="mainInfo2">
+                </div>
+                <!--出价记录-->
+                <div id="auctionList">
+
+                </div>
+                <!--评论以及评论列表-->
+
+                <!--//End--flow-btn-->
+                <!--//End--add-->
+            </section>
+        </div>
+    </div>
+
+
+    <div id="bottomButton">
+        <!--底部按钮-->
+    </div>
+
+</article>
+<script>
+    var swiperContainerOption = {};
+</script>
+<!--大师名称-->
+<script type="text/x-dot-template" id="artWorkMasterName">{{=it.masterName}}</script>
+<!--项目名称-->
+<script type="text/x-dot-template" id="artWorkBaseInfoTitle">
+    {{=it.name}}
+</script>
+<!--进度主图片-->
+<script type="text/x-dot-template" id="artWorkProgressPicture">
+    <div class="bg-pic"></div>
+    <div class="name t16 cff">{{=it.name}}</div>
+    <img class="ui centered image" src="{{=it.picture_url}}">
+</script>
+<!--项目主图片-->
+<script type="text/x-dot-template" id="artWorkDaybefore">
+    {{=getTimePre(it.investStartDatetime)}}
+</script>
+
+
+
+<script type="text/x-dot-template" id="artWorkBaseInfoPicture">
+    <img class="ui centered image" src="{{=it.picture_url}}!ryt-detail-main-picture">
+    <div class="schedule course">
+        {{
+        var style = "";
+        var currentTime = new Date();
+        var time =0;
+        if( it.step=="30" ) {
+        time = it.auctionStartDatetime - currentTime.getTime();
+        }else if(it.step == "31"){
+        time = it.auctionEndDatetime-currentTime.getTime();
+        }
+        if(time > 86400000) {
+        style = "display:none";
+        }else if ( time<86400000 ){
+        var pesent = time/86400000*100;
+        style = "width:"+pesent+"%";
+        }
+        }}
+        <div class="s-line" id="countDown" style="{{=style}}"></div>
+        <div class="s-page">
+            <i class="wait icon"></i>
+            {{ if(it.step=="30"){ }}
+            <span>拍卖预告</span>
+            {{ }else if(it.step=="31"){ }}
+            <span>拍卖中</span>
+            {{ }else { }}
+            <span>拍卖结束</span>
+            {{ } }}
+            {{ if(it.step=="31"){ }}
+            <span><em id="hh">20</em>小时<em id="mm">30</em>分<em id="ss">30</em>秒后拍卖结束</span>
+            {{ } else if(it.step=="30"){ }}
+            <span><em id="hh">20</em>小时<em id="mm">30</em>分<em id="ss">30</em>秒后拍卖开始</span>
+            {{ } else{ }}
+            <span>恭喜{{=it.winner}}拍得此件作品</span>
+            {{ } }}
+        </div>
+    </div>
+</script>
+<script type="text/x-dot-template" id="artWorkBaseInfoMain2">
+    <div class="bd title">
+        <h1 class="fl t21">{{=it.name}}</h1>
+    </div>
+    <div class="bd item">
+        <li class="bd c33" style="height:14px;line-height:14px">{{=it.brief}}</li>
+        {{ if(it.step=="30"){ }}
+        <li class="bd c71" id="currentPrice">¥ {{=(it.startingPrice==null ? "0.00" : it.startingPrice)}}
+        </li>
+        <li class="bd c99">起拍价</li>
+        {{ } else if ( it.step=="31" ){ }}
+        <li class="bd c71" id="currentPrice">¥ {{=(it.currentAuctionPrice == null ? "0.00" :
+            it.currentAuctionPrice)}}
+        </li>
+        <li class="bd c99">当前价</li>
+        {{ } else if ( it.step=="32" ){ }}
+        <li class="bd c71" id="currentPrice">¥ {{=(it.currentAuctionPrice == null ? "0.00" :
+            it.currentAuctionPrice)}}
+        </li>
+        <li class="bd c99">成交价</li>
+        {{ } }}
+
+        <dl class="bd mt12 bor-top-f5 pt15 pb15 users">
+            <div class="bid-node t12 c99 di">
+                <i class="legal icon"></i>
+                <span>出价<em>{{=PageVariable.auctionNum}}</em>次</span>
+            </div>
+            <div class="look-node t12 c99 di">
+                <i class="arrow circle outline up icon"></i>
+                <span>加价幅度<em>{{=getAuctionPrice(it.startingPrice) }}</em>元</span>
+            </div>
+            <div class="look-node t12 c99 di">
+                <i class="unhide icon"></i>
+                <span>围观 {{=PageVariable.viewNum}}</span>
+            </div>
+        </dl>
+
+    </div>
+</script>
+<script type="text/x-dot-template" id="artWorkAuctionBidding">
+<div class="ui bd invest">
+    <div class="bd dd">
+        <ul>
+            {{
+            var biddingF = it.artWorkBiddingList[0];
+            console.log(biddingF);
+            }}
+            <li class="good">
+                <div class="fl t12">
+                    <span onclick="redirectUser('{{=biddingF.creator.id}}')"><img src="{{=biddingF.creator.pictureUrl}}" width="30" height="30" alt=""></span>
+                    <span>{{=dealUsername(biddingF.creator.username,3,4)}}</span>
+                    <span>{{=getDateFormatStr(biddingF.createDatetime,"MM.dd")}}</span>
+                    <span>{{=getDateFormatStr(biddingF.createDatetime,"hh:mm:ss")}}</span>
+                </div>
+                <em>成交<a>¥ {{=parseInt(biddingF.price)}}</a></em>
+            </li>
+            {{ for (var i = 1 ;i < it.artWorkBiddingList.length; i++){
+            var bidding = it.artWorkBiddingList[i];
+            }}
+            <li>
+                <div class="fl t12">
+                    <span onclick="redirectUser('{{=biddingF.creator.id}}')"><img src="{{=bidding.creator.pictureUrl}}" width="30" height="30" alt=""></span>
+                    <span>{{=dealUsername(bidding.creator.username,3,4)}}</span>
+                    <span class="">{{=getDateFormatStr(bidding.createDatetime,"MM.dd")}}</span>
+                    <span>{{=getDateFormatStr(bidding.createDatetime,"hh:mm:ss")}}</span>
+                </div>
+                <em>出局<a>¥ {{=parseInt(bidding.price)}}</a></em>
+            </li>
+            {{ } }}
+            <!--<a href="" class="bd t13 c4c bor-top-f5 more">查看更多</a>-->
+        </ul>
+    </div>
+</div>
+</script>
+<script type="text/x-dot-template" id="artWorkComment">
+    {{
+    for(var i = 0 ; i < it.commentList.length ; i++){
+    var comment = it.commentList[i];
+    }}
+    <li>
+        <!--头像-->
+        <a onclick="redirectUser('{{=comment.creator.id}}')"><img src="{{=comment.creator.pictureUrl}}"
+                                                                  alt=""></a>
+        <!--内容-->
+        <div class="content">
+            <h5 class="bd t11">{{=comment.creator.name}}<i class="icons icon-v"></i></h5>
+            <h6 class="bd t7 c97">{{=getTimePre(comment.createDatetime)}}</h6>
+            {{ if( typeof comment.fatherComment != "undefined" && comment.fatherComment!=null){ }}
+            <p class="bd t11 c66 answer">回复<a class="c51">@{{=comment.fatherComment.creator.name}}</a>：<span>{{=comment.content}}</span>
+            </p>
+            {{ } else{ }}
+            <p class="bd t11 c66 answer" onclick="repeatComment('{{=comment.id}}','{{=comment.creator.name}}')">
+                {{=comment.content}}</p>
+            {{ } }}
+        </div>
+    </li>
+    {{ } }}
+</script>
+
+
+
+<script type="text/x-dot-template" id="artWorkMaster">
+    <div class="content">
+        <div class="thumb"><img src="{{=it.pictureUrl}}" height="35" width="35" alt=""><i
+                class="icons icon-v2" style="bottom: 16px;"></i></div>
+        <div class="info">
+            <p class="bd"><span class="t10">{{=it.name}}</span><span class="c66">{{=it.master.title}}</span></p>
+            <p class="bd c99"><span id="masterArtWorkNum">{{=getArtWorkNum(it.id)}}件作品</span><span id="masterFansNum">{{=getFansNum(it.id)}}个粉丝</span>
+            </p>
+        </div>
+        {{ if(PageVariable.isFollow) { }}
+        <a href="#icon-add" class="button-add bor-all-ccc" title="" style="width: 50px;height: 30px;">已关注</i></a>
+        {{ }else{ }}
+        <a href="#icon-add" class="button-add bor-all-ccc" title=""
+           onclick="newArtFollowMasterData(checkArtFollowMaster)"><i class="icons icon-add"></i></a>
+        {{ } }}
+    </div>
+</script>
+<script type="text/x-dot-template" id="artWorkDetail">
+    <div class="bd case details-page ">
+        {{ for(var i=0;i < it.artworkAttachmentList.length;i++){ }}
+        <img class="bd mb7" src="{{=it.artworkAttachmentList[i].fileName}}" alt="">
+        {{ } }}
+
+        <p class="bd t14 c33 pl12 pr12">{{=it.description}}</p>
+    </div>
+
+    <div class="bd case details-page pl12 pr12">
+        <h5 class="t14 c00 bd c33">创作流程说明</h5>
+        <p class="mp bd t14 c33">{{=it.make_instru}}</p>
+    </div>
+
+    <div class="bd case details-page pl12 pr12">
+        <h5 class="t14 c00 bd c33">融资解惑</h5>
+        <div class="bd">
+            <div class="bd list">
+                <div class="issue">Q1.</div>
+                <div class="answer">
+                    <p>{{=it.financing_aq}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
+<!--多少天后截止&投资人数以及金额-->
+<script type="text/x-dot-template" id="artWorkDataInfo">
+    <div class="items">
+        <p class="circle"></p>
+        <p class="t10 c99">{{=getDayNums((new Date().getTime())-(it.investEndDatetime))}}天后截止</p>
+    </div>
+    <div class="items">
+        <div id="indicatorContainer"></div>
+        <!--<p class="circle"></p>-->
+        <p class="t10 c99">{{=it.artworkInvestsSize}}人投资 ¥{{=it.investsMoney}}/{{=it.investGoalMoney}}</p>
+    </div>
+</script>
+<!--进度-->
+<script type="text/x-dot-template" id="artWorkScheduleMessage">
+
+    {{
+    for(var k = 0 ; k < it.messageList.length ; k++){
+    var message = it.messageList[k];
+    }}
+    <div class="comment">
+        <div class="avatar">{{=getDayStr(it.auctionStartDatetime)}}<span class="t9">{{=getDateStr(it.investStartDatetime)}}</span>
+        </div>
+        <div class="content">
+            <span class="author">{{=message.content}}</span>
+            {{ if(message.artworkMessageAttachments.length > 2){ }}
+            <div class="text image">
+                {{for(var j = 0 ; j < message.artworkMessageAttachments.length ; j++){var attachments =
+                message.artworkMessageAttachments[j];}}
+                <div class="swiper-slide"><img src="{{=attachments.fileUri}}" alt=""></div>
+                {{ } }}
+            </div>
+            {{ }else{ }}
+            <div class="text">
+                {{for(var j = 0 ; j < message.artworkMessageAttachments.length ; j++){var attachments =
+                message.artworkMessageAttachments[j];}}
+                {{if(attachments.fileType == "0"){ }}
+                <div class="swiper-slide"><img src="{{=attachments.fileUri}}" width="105" alt=""></div>
+                {{ }else if(attachments.fileType == "1"){ }}
+                <video style="background: #000;width:100%" src="{{=attachments.fileUri}}" preload="preload"
+                       controls="controls" height="200"></video>
+                {{ } }}
+                {{ } }}
+            </div>
+            {{ } }}
+
+            <div class="actions">
+                <a class="date t9">{{=getTimePre(it.createDatetime)}}</a>
+                <a class="reply" href="">
+                    <i class="caret left icon"></i><i class="icon_reply"></i>
+                </a>
+                <div class="ui black tiny button divided horizontal list">
+                    <div class="layer" id="{{=message.id}}buttons">
+                        {{=getMessageButtons(message)}}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ui message">
+                {{ if(message.artWorkPraiseList.length > 0 || message.artworkCommentList.length > 0){ }}
+                <i class="caret up icon"></i>
+                {{ } }}
+                <!--点赞-->
+                <div class="ui feed">
+                    {{ if(message.artWorkPraiseList.length>0){ }}
+                    <div class="event" id="{{=message.id}}praiseIcon">
+                        {{ } else{ }}
+                        <div class="event" id="{{=message.id}}praiseIcon" style="display: none">
+                            {{ } }}
+                            <div class="label" >
+                                <i class="empty heart icon"></i>
+                            </div>
+                            <div class="content" id="{{=message.id}}praise">
+                                {{=getPraiseList(message)}}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{ for (var i = 0 ; i < message.artworkCommentList.length ; i++) {
+                    var comment = message.artworkCommentList[i];
+                    }}
+
+                    {{ if( typeof comment.fatherComment != "undefined" && comment.fatherComment!=null){ }}
+                    <div class="ui list">
+                        <div class="item">
+                            <div class="content">
+                                <a onclick="redirectUser('{{=comment.creator.id}}')">
+                                    {{if(comment.creator.id==getCurrentUserId()){
+                                    }}我的{{ } else{ }} {{=comment.creator.name}} {{ } }}</a>回复<a
+                                    onclick="redirectUser('{{=comment.fatherComment.creator.id}}')">{{=comment.fatherComment.creator.name}}</a>：<a
+                                    onclick="submitComment('{{=comment.id}}','{{=message.id}}')"><span>{{=comment.content}}</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    {{ }else{ }}
+                    <div class="ui list">
+                        <div class="item">
+                            <div class="content">
+                                <a onclick="redirectUser('{{=comment.creator.id}}')">{{=comment.creator.name}}</a>：{{=comment.content}}
+                            </div>
+                        </div>
+                    </div>
+                    {{ } }}
+
+                    {{ } }}
+                </div>
+
+
+            </div>
+        </div>
+        {{ } }}
+</script>
+<!--投资记录-默认展示-->
+<script type="text/x-dot-template" id="artWorkInvestRecordList">
+    <ul>
+        {{ if(it.investList.length<5){ }}
+        {{
+        for (var i = 0 ; i< 5 ; i++) {
+        var investTemp = it.investList[i];
+        }}
+        <li>
+            <i class="icons num num1">1</i>
+            <div class="fl t11">
+                <span><img src="{{=investTemp.creator.pictureUrl}}" width="25" height="25" alt=""></span>
+                <span>{{=investTemp.creator.name}}</span>
+                <span class="c99">投资了</span>
+                <span>￥{{=parseInt(investTemp.price)}}</span>
+            </div>
+            <em>{{=getDateFormatStr(investTemp.createDatetime,"MM月dd日 hh:mm")}}</em>
+        </li>
+        {{ } }}
+        {{ }else{ }}
+        {{
+        for (var i = 0 ; i< 5 ; i++) {
+        var investTemp = it.investList[i];
+        }}
+        <li>
+            <i class="icons num num1">1</i>
+            <div class="fl t11">
+                <span><img src="{{=investTemp.creator.pictureUrl}}" width="25" height="25" alt=""></span>
+                <span>{{=investTemp.creator.name}}</span>
+                <span class="c99">投资了</span>
+                <span>￥{{=parseInt(investTemp.price)}}</span>
+            </div>
+            <em>{{=getDateFormatStr(investTemp.createDatetime,"MM月dd日 hh:mm")}}</em>
+        </li>
+        {{ } }}
+        <a href="javascript:void(0);" id="btn-mores" class="bd t10 c4c bor-top-f5 more">查看更多</a>
+        {{ } }}
+    </ul>
+</script>
+<!--投资记录-默认展示-->
+<script type="text/x-dot-template" id="artWorkInvestRecordListAll">
+    <ul>
+        {{
+        for (var i = 5 ; i< it.investList.length ; i++) {
+        var investTemp = it.investList[i];
+        }}
+        <li>
+            <i class="icons num num1">1</i>
+            <div class="fl t11">
+                <span><img src="{{=investTemp.creator.pictureUrl}}" width="25" height="25" alt=""></span>
+                <span>{{=investTemp.creator.name}}</span>
+                <span class="c99">投资了</span>
+                <span>￥{{=parseInt(investTemp.price)}}</span>
+            </div>
+            <em>{{=getDateFormatStr(investTemp.createDatetime,"MM月dd日 hh:mm")}}</em>
+        </li>
+        {{ } }}
+    </ul>
+</script>
+<!--点赞-->
+<script type="text/x-dot-template" id="messagePraise">
+
+    {{ for (var i = 0 ; i < it.artWorkPraiseList.length ; i++) {
+    var praise = it.artWorkPraiseList[i];
+    }}
+    <a href="">{{=praise.user.name}}</a><em>，</em>
+    {{ } }}
+
+</script>
+<script type="text/x-dot-template" id="messageButtons">
+    {{ if(!isPraised(it)){ }}
+    <div class="item" onclick="newArtWorkPraise('{{=it.id}}','1')"><i
+            class="empty heart icon"></i>赞
+    </div>
+    {{ }else{ }}
+    <div class="item" onclick="newArtWorkPraise('{{=it.id}}','0')"><i
+            class="heart icon"></i>取消
+    </div>
+    {{ } }}
+    <div class="item"><i class="icons discuzz"></i>评论</div>
+</script>
+<script type="text/x-dot-template" id="artWorkBrief">{{=it.brief}}</script>
+<!--大师头像-->
+<script type="text/x-dot-template" id="artWorkHeadUrl">
+    <a onclick="redirectUser('{{=it.masterId}}')"><img class="ui circular image" src="{{=it.headUrl}}!app-user-head"
+                                                       height="35" width="35" alt=""><i class="icons icon-v2"></i></a>
+</script>
+<!--大师简介-->
+<script type="text/x-dot-template" id="artWorkMasterTitle">{{=it.title}}</script>
+<!--大师作品总数-->
+<script type="text/x-dot-template" id="artWorkMasterWorkNum">{{=it.masterWorkNum}}</script>
+<!--粉丝总数-->
+<script type="text/x-dot-template" id="artWorkMasterFansNum">{{=it.fansNum}}</script>
+
+<script src="scripts/js/jquery-3.1.0.min.js"></script>
+<script src="scripts/js/jquery.md5.js"></script>
+<script src="scripts/js/local/doT.min.js"></script>
+<script src="scripts/js/local/common.js"></script>
+<script src="scripts/js/radialIndicator.js"></script>
+<script src="scripts/js/local/invest/app.js"></script>
+<script src="scripts/js/local/invest/model.js"></script>
+<script src="scripts/js/local/invest/controller.js"></script>
+<script language="JavaScript" src="scripts/js/system.js"></script>
+<script language="JavaScript" src="scripts/js/semantic.min.js"></script>
+
+
+<script>
+
+    RequestUrl = {
+        commentTab: "/app/investorArtWorkComment.do",
+        artWorkViewTab: "/app/investorArtWorkView.do",
+        initPage: "/app/artWorkAuctionView.do",
+        auctionTab: "/app/plistArtworkBidding.do",    //拍卖纪录接口
+        bid: "/app/artworkBid.do",   //出价接口
+        consumerAddress: "/app/getDefaultAddress.do",
+        createComment: "/app/artworkComment.do",
+        artFollowMasterList: "/app/followMasterList.do",
+        newArtFollowMaster: "/app/followMaster.do",
+        masterFansNum: "/app/fansNum.do",
+        artWorkNum: "/app/artWorkNum.do",
+        newArtWorkPraise: "/app/artworkPraise.do"
+    }//接口对象
+
+    $().ready(function () {
+        initPage();
+        //解决进度页面高度问题
+        setTimeout(function () {
+            $('.header.swiper-menu .item span:first-child').trigger('click');
+        }, 1000);
+    })
+
+    function isPraised(message) {
+        var artWorkPraiseList = message.artWorkPraiseList;
+        var result = false;
+        for (var i = 0; i < artWorkPraiseList.length; i++) {
+            var artWorkPraise = artWorkPraiseList[i];
+            if (artWorkPraise.user.id == getParamObject().currentUserId) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+
+    function getArtWorkNum(id) {
+        window.artWorkNumSuccess = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+                var artWorkNum = dataTemp["artworkList"].length;
+                $("#masterArtWorkNum").html(artWorkNum + "件作品");
+            }, data);
+        }
+        var param = getParamObject();
+        param["masterId"] = id;
+        ajaxRequest(hostName + RequestUrl.artWorkNum, param, window.artWorkNumSuccess, function () {
+        }, "artWorkNumSuccess");
+        return 0;
+    }
+    function getFansNum(id) {
+        window.fansNumSuccess = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+                var fansNum = dataTemp["artUserFollowedList"].length;
+                $("#masterFansNum").html(fansNum + "个粉丝");
+            }, data);
+        }
+        var param = getParamObject();
+        param["masterId"] = id;
+        ajaxRequest(hostName + RequestUrl.masterFansNum, param, window.fansNumSuccess, function () {
+        }, "fansNumSuccess");
+        return 0;
+        return 0
+    }
+    function getCurrentUserId() {
+        return getParamObject()["currentUserId"];
+    }            //获得当前用户的id
+    function submitDepositPrice(price) {
+        console.log(price);
+        if ($(".deal-icon").attr("class") == "deal-icon mo") {
+            console.log("阅读协议")
+            getAlert("请阅读协议！");
+        } else if (typeof PageVariable.consumerAddress == "undefined" || PageVariable.consumerAddress == null) {
+            console.log("选择收货地址")
+            getAlert("请先选择收货地址！");
+        } else {
+            console.log("redirect");
+            var depositPrice = getDepositPrice(price);
+            redirectPay(depositPrice, "payMargin");
+        }
+    }    //提交保证金
+    function getDepositPrice(startingPrice) {
+        if (startingPrice == "null") {
+            return 0;
+        } else {
+            return parseInt(startingPrice * 0.1);
+        }
+    }//计算保证金
+    function getAuctionPrice(price) {
+        //计算加价幅度
+        if (price <= 499) {
+            return 10;
+        } else if (price >= 500 && price <= 999) {
+            return 50;
+        } else if (price >= 1000 && price <= 4999) {
+            return 100;
+        } else if (price >= 5000 && price <= 9999) {
+            return 200;
+        } else if (price >= 10000 && price <= 29999) {
+            return 500;
+        } else if (price >= 30000 && price <= 99999) {
+            return 1000;
+        } else if (price >= 100000) {
+            return 2000;
+        }
+    }       //计算加价幅度
+    function submitRestPrice() {
+        if ($("#radio").attr("class") == "active") {
+            var restPrice = getCurrentFinalPrice();
+            redirectPay(restPrice, "auction");
+        } else {
+            getAlert("请阅读协议！");
+        }
+    }            // 付尾款
+    function getCurrentFinalPrice() {
+//        当前拍卖价格 - 起拍价格 * 0.1
+        return PageVariable.artWorkInfo.currentAuctionPrice - (PageVariable.startingPrice * 0.1)
+        //获得竞拍得主应付尾款
+    }       //计算尾款金额
+    function getCurrentAuctionPrice(currentAuctionPrice) {
+        return currentAuctionPrice + getAuctionPrice(PageVariable.startingPrice)
+    } //获得当前出价的价格
+    function repeatComment(fatherCommentId, fatherCommentCreator) {
+        //1.拼写placeholder
+        var placeholder = "回复 @" + fatherCommentCreator + " : ";
+        //2.更新fatherCommentId
+        PageVariable.fatherCommentId = fatherCommentId;
+        $("#commentContent").attr("placeholder", placeholder).focus();
+
+    }
+    var ChooseCountComponent = function () {
+        var parentDiv = $(".addsub");
+        var options = new Object();
+        options["upLimit"] = 100; //默认上限  当数值达到上限的时候 加号不可点
+        options["downLimit"] = 1; //默认下限   当数值达到下限的时候 减号不可点
+        options["inputStatus"] = 0; //0为不可输入  1为可输入
+        options["defaultValue"] = 1;
+        options["inputName"] = "";
+        options["step"] = 1;
+        var componentOption = parentDiv.attr("data-option"); //json字符串
+        if (typeof componentOption != "undefined") {
+            componentOption = JSON.parse(componentOption);
+
+            if (typeof componentOption["defaultValue"] == "string") {
+                options["defaultValue"] = Number(componentOption["defaultValue"]);
+            }
+            if (typeof componentOption["upLimit"] == "string") {
+                options["upLimit"] = Number(componentOption["upLimit"]);
+            }
+            if (typeof componentOption["downLimit"] == "string") {
+                options["downLimit"] = Number(componentOption["downLimit"]);
+            }
+            if (typeof componentOption["inputStatus"] == "string") {
+                options["inputStatus"] = Number(componentOption["inputStatus"]);
+            }
+            if (typeof componentOption["inputName"] == "string") {
+                options["inputName"] = componentOption["inputName"];
+            }
+            if (typeof componentOption["step"] == "string") {
+                options["step"] = componentOption["step"];
+            }
+        }
+        var disabled = "";
+        if (options["inputStatus"] == 1) {
+            disabled = "disabled";
+        }
+        var html = '<em class="sub"></em> <input class="ipt-txt" name="' + options["inputName"] + '" ' + disabled + ' type="text" value="' + options["defaultValue"] + '"> <em class="add"></em>'
+//        var html = '<div class="opt"><a class="sub" title="减" ></a><input name="' + options["inputName"] + '" ' + disabled + ' class="ipt-txt" type="text" value="' + options["defaultValue"] + '" /><a class="add" title="加" ></a></div>'
+        //加号的事件
+        var addAction = function (e) {
+            var inputElement = $(e.target).parent().find(".ipt-txt");
+            var actionOptions = options;
+            var currentValue = Number(inputElement.val());
+            if (actionOptions["upLimit"] == -1 || Number(currentValue) < actionOptions["upLimit"]) {
+                currentValue += Number(options["step"]);
+                inputElement.val(currentValue);
+            }
+        }
+        var subAction = function (e) {
+            var inputElement = $(e.target).parent().find(".ipt-txt");
+            var actionOptions = options;
+            var currentValue = Number(inputElement.val());
+            if (actionOptions["downLimit"] == -1 || Number(currentValue) > actionOptions["downLimit"]) {
+                currentValue -= Number(options["step"]);
+                inputElement.val(currentValue);
+            }
+        }
+        parentDiv.on("click", ".add", addAction);
+        parentDiv.on("click", ".sub", subAction);
+        parentDiv.html(html);
+    } //加价组件
+
+</script>
+
+</body>
+</html>

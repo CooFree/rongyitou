@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4D000000"
+    >
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保证金"
+                android:textSize="@dimen/defult_font"
+                android:textColor="@android:color/black"/>
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="￥100"
+                android:textSize="@dimen/title"
+                android:textColor="@android:color/holo_red_dark"/>
+        </LinearLayout>
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:textColor="#999999"
+            android:layout_marginBottom="16dp"
+            android:text="保证金将被冻结，若竞拍不成功将退回您所选的支付方式的账户中。"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="#E9E9E9"></View>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp">
+            <LinearLayout
+                android:id="@+id/ll_add_address"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="添加收货地址~"
+                    android:textColor="#999999"
+                    />
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/rl_address"
+                android:layout_width="match_parent"
+                android:visibility="invisible"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/ll_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/defult_font"
+                        android:text="温群英"/>
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/defult_font"
+                        android:text="13000000000"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_below="@+id/ll_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/defult_font"
+                    android:layout_marginRight="30dp"
+                    android:text="温群英llllllllll/////////////////////////////////////////////////"/>
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:src="@mipmap/arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="#E9E9E9"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:id="@+id/iv_selected"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/before"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="同意融易投竞拍协议"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/tv_auction_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《融艺投竞拍协议》"
+                android:textSize="15sp"
+                android:textColor="#5284BD"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_pay"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="#57AC68"
+            android:gravity="center"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_pay"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/commit_money" />
+
+            <TextView
+                android:id="@+id/tv_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="提交保证金"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/defult_font" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

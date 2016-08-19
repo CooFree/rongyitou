@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="actionsheet_single_gray">#E4E4E4</color>
+    <color name="none_color">#00000000</color>
+    <color name="color_black_dialog">#c7000000</color>
+
+
+    <color name="color_gray_eaeaea">#eaeaea</color>
+    <color name="white">#ffffff</color>
+    <color name="color_black_333333">#333333</color>
+    <color name="color_grey_999999">#999999</color>
+    <color name="color_black_d9d9d9">#d9d9d9</color>
+    <color name="color_purple_bd6aff">#FF000000</color>
+    <color name="GreyWhite_has_alpha">#66FAFAFA</color>
+    <color name="transparent">#00000000</color>
+    <color name="action_bar_tittle_color_555555">#FF000000</color>
+    <color name="province_line_border1">#cdcdcd</color>
+    <color name="province_line_border">#C7C7C7</color>
+    <color name="textview_line_border">#ef5b70</color>
+    <color name="color_progressbar">#E5E5E5</color>
+    <color name="color_progress">#E64056</color>
+    //加载更多
+    <color name="footerview">#333333</color>
+    //评论hint
+    <color name="comment_hint">#666666</color>
+    //invest hint
+    <color name="invest_hint">#999999</color>
+</resources>

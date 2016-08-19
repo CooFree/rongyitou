@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 配置不过滤的资源（静态资源及登录相关） -->
+    <http pattern="/**/*.css" security="none"/>
+    <http pattern="/**/*.jpg" security="none"/>
+    <http pattern="/**/*.jpeg" security="none"/>
+    <http pattern="/**/*.gif" security="none"/>
+    <http pattern="/**/*.png" security="none"/>
+    <http pattern="/js/*.js" security="none"/>
+    <!--<http auto-config="true">-->
+    <!--<intercept-url pattern="/app.jsp" access="ROLE_SERVICE"/>-->
+    <!--<intercept-url pattern="/**" access="ROLE_ADMIN"/>-->
+    <!--</http>-->
+
+    <http realm="Contacts Realm" use-expressions="true">
+        <csrf disabled="true"/>
+
+        <intercept-url pattern="/main.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/basic/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/company/**" access="isAuthenticated()"/><!--企业礼品卡-->
+        <intercept-url pattern="/promotionPlan/**" access="isAuthenticated()"/><!--返利链接-->
+        <intercept-url pattern="/virtualPlan/**" access="isAuthenticated()"/><!--虚拟计划-->
+        <intercept-url pattern="/scoreboard/**" access="isAuthenticated()"/><!--微信答题-->
+        <anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>
+        <form-login login-page="/pc/login.do" login-processing-url="/j_spring_security_check"
+                    authentication-success-handler-ref="loginSuccessHandler"
+                    authentication-failure-handler-ref="loginFailureHandler"/>
+        <logout invalidate-session="true" logout-url="/j_spring_security_logout"
+                success-handler-ref="loginOutSuccessHandler"/>
+        <remember-me user-service-ref="userManager" data-source-ref="dataSource" token-validity-seconds="1209600" remember-me-parameter="remember-me"/>
+    </http>
+    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.system.organization.LoginOutSuccessHandler"/>
+    <b:bean id="loginSuccessHandler" class="com.efeiyi.ec.system.organization.LoginSuccessHandler"/>
+    <b:bean id="loginFailureHandler" class="com.efeiyi.ec.system.organization.LoginFailureHandler"/>
+
+    <!--<com.efeiyi.ec.website.base.authentication-manager>-->
+    <!--<com.efeiyi.ec.website.base.authentication-provider>-->
+    <!--<user-service>-->
+    <!--<user name="admin" password="admin" authorities="ROLE_ADMIN"/>-->
+    <!--</user-service>-->
+    <!--</com.efeiyi.ec.website.base.authentication-provider>-->
+    <!--</com.efeiyi.ec.website.base.authentication-manager>-->
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="userManager">
+            <password-encoder hash="sha"/>
+        </authentication-provider>
+    </authentication-manager>
+</b:beans>

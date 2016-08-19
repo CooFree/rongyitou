@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/pi_ll_top"
+    android:background="@android:color/white">
+    <RelativeLayout
+        android:id="@+id/pli_rl_all"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.yxh.ryt.custemview.CircleImageView
+            android:id="@+id/pi_iv_icon"
+            android:layout_width="40dp"
+            android:layout_centerVertical="true"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/pi_iv_icon">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/pi_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="三毛猫"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                />
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/pi_tv_content"
+                    android:textSize="14sp"
+                    android:textColor="#808080"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016-02-19  14:00"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+
+            
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/pli_ll_count"
+           android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:background="@mipmap/shuliang">
+            <TextView
+                android:id="@+id/pli_tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textSize="12sp"
+                android:textColor="#ffffff"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E9E9E9"/>
+</LinearLayout>

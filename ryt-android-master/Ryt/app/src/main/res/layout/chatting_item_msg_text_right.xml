@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+		android:paddingTop="14dp"
+		android:paddingLeft="14dp"
+		android:paddingRight="14dp">
+	
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" 
+	        android:gravity="center_horizontal">
+	
+	        <TextView
+            	android:id="@+id/tv_sendtime"
+				style="@style/chat_text_date_style"
+				android:layout_width="wrap_content"
+				android:layout_height="20dp"/>
+	        
+	    </LinearLayout>
+	
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginRight="5dp" >
+
+			<com.yxh.ryt.custemview.CircleImageView
+				android:id="@+id/iv_userhead"
+				android:layout_width="44dp"
+				android:layout_height="44dp"
+				android:focusable="false"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true"
+				android:src="@mipmap/ic_launcher" />
+			<!--<RelativeLayout
+				android:id="@+id/tv_ll"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="6dp"
+				android:gravity="right"
+				android:layout_toLeftOf="@id/iv_userhead">
+				<TextView
+					android:id="@+id/tv_username"
+					style="@style/chat_text_name_style"
+					android:layout_width="wrap_content"
+					android:gravity="right"
+					android:layout_height="wrap_content"
+					/>
+				<TextView
+					android:id="@+id/tv_chatcontent"
+					style="@style/chat_content_date_style1"
+					android:gravity="right"
+					android:layout_width="wrap_content"
+					android:text="aaf"
+					android:layout_height="wrap_content"
+					android:background="@drawable/chat_right" />
+			</RelativeLayout>-->
+			<TextView
+				android:layout_marginRight="6dp"
+				android:id="@+id/tv_chatcontent"
+				style="@style/chat_content_date_style1"
+				android:layout_width="wrap_content"
+				android:text="aaf"
+				android:layout_height="wrap_content"
+				android:background="@drawable/chat_right"
+				android:layout_toLeftOf="@id/iv_userhead"/>
+
+	            <TextView
+					android:id="@+id/tv_time"
+					android:visibility="gone"
+					android:layout_marginRight="10dp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textSize="15sp"
+					android:textColor="#ff000000"
+					android:gravity="left|center"
+					android:minHeight="50dp"
+					android:lineSpacingExtra="2dp"
+					android:clickable="true"
+					android:focusable="true"/>
+	    </RelativeLayout>
+
+</LinearLayout>

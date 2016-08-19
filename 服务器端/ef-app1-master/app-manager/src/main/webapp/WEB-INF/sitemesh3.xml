@@ -1,0 +1,17 @@
+<sitemesh>
+    <mapping path="/main.do" decorator="/layouts/main.jsp"/>
+   <mapping path="/basic/xm.do" decorator="/layouts/main.jsp"/>
+    <!--<mapping path="/*" decorator="/layouts/main.jsp"/>-->
+    <mapping path="/basic/**" decorator="/layouts/main.jsp"/>
+    <mapping path="/Recommended/**" decorator="/layouts/main.jsp"/>
+    <mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>
+    <mapping path="/pc/login.do" decorator="/layouts/iframe.jsp"/>
+    <mapping path="/" decorator="/layouts/iframe.jsp"/>
+    <mapping path="/product/saveNewProduct.do" decorator="/layouts/main.jsp"/>
+    <mapping path="/master/toTenantMaster.do" decorator="/layouts/main.jsp"/>
+    <mapping path="/product/project/toTenantProject.do" decorator="/layouts/main.jsp"/>
+    <mapping path="/promotionPlan/**" decorator="/layouts/main.jsp"/><!--返利-->
+    <mapping path="/virtualPlan/**" decorator="/layouts/main.jsp"/><!--虚拟计划-->
+    <mapping path="/scoreboard/**" decorator="/layouts/main.jsp"/><!--微信答题-->
+    <mapping path="/imgView.jsp*" exclue="true" />
+</sitemesh>

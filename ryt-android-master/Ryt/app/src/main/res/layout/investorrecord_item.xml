@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@android:color/white"
+    >
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_centerVertical="true">
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/civ_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/cl_01_civ_pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <com.yxh.ryt.custemview.CircleImageView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/iri_iv_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/iri_tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:text="小小kasjhhjkfjdksjkfk"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/defult_font" />
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+           android:gravity="center_vertical"
+            android:text="投资了"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/iri_tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="800"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/defult_font" />
+
+</LinearLayout>
+    <TextView
+        android:layout_alignParentRight="true"
+        android:id="@+id/iri_tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="2016-01-01 "
+        android:textSize="14sp" />
+</RelativeLayout>

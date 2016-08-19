@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/arvf_rl_full">
+    <VideoView
+        android:layout_centerInParent="true"
+        android:id="@+id/arvf_vv_full"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="轻触退出"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"/>
+
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/rl_top">
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/defult_font"
+            android:textColor="#000000"
+            android:text="取消"
+            />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="@dimen/defult_font"
+            android:text="保存"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#E9E9E9"
+            android:layout_height="10dp"></View>
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/et_brief"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:textSize="@dimen/title"
+        android:textColor="#808080"
+        android:lineSpacingExtra="8dp"
+        android:singleLine="false"
+        android:gravity="top"
+        android:hint="编辑简介"
+        android:background="@drawable/public_brief_et_bg"
+        android:padding="14dp"
+        />
+</LinearLayout>

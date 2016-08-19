@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<module name="project" label="project" version="" package="com.efeiyi.ec.project" path="">
+
+    <entities>
+
+        <entity name="Artwork" label="Artwork"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.Artwork">
+            <fields>
+                <field name="type" label="项目阶段" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="发起阶段" value="0"/>
+                        <item label="融资阶段" value="1"/>
+                        <item label="制作阶段" value="2"/>
+                        <item label="拍卖阶段" value="3"/>
+                        <item label="抽奖阶段" value="4"/>
+                        <item label="驳回" value="5"/>
+                    </statusType>
+                </field>
+                <field name="step" label="项目阶段状态" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="编辑阶段，尚未提交" value="100"/>
+                        <item label="融资待审核" value="10"/>
+                        <item label="融资审核中" value="11"/>
+                        <item label="融资审核通过" value="12"/>
+                        <item label="融资审核未通过，已驳回" value="13"/>
+                        <item label="融资中" value="14"/>
+                        <item label="融资完成" value="15"/>
+                        <item label="创作前" value="20"/>
+                        <item label="创作中" value="21"/>
+                        <item label="创作延时" value="22"/>
+                        <item label="创作完成待审核" value="23"/>
+                        <item label="创作完成审核中" value="24"/>
+                        <item label="创作完成被驳回" value="25"/>
+                        <item label="拍卖前" value="30"/>
+                        <item label="拍卖中" value="31"/>
+                        <item label="拍卖结束" value="32"/>
+                        <item label="流拍" value="33"/>
+                        <item label="待支付尾款" value="34"/>
+                        <item label="待发放" value="35"/>
+                        <item label="已发放" value="36"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistArtwork" access="" label="artwork列表"
+                    result="/artwork/ArtworkPList">
+                    <query name="default" label="默认" type="auto" orderBy="sorts:desc,createDatetime:desc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+
+                    <query name="default1" label="全部状态" type="auto" orderBy="sorts:desc,createDatetime:desc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="default2" label="融资" type="auto" orderBy="sorts:desc,createDatetime:desc">
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="default3" label="制作" type="auto" orderBy="sorts:desc,createDatetime:desc">
+                        <condition name="status" defaultValue="2" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="default4" label="拍卖" type="auto" orderBy="sorts:desc,createDatetime:desc">
+                        <condition name="status" defaultValue="3" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="default5" label="抽奖" type="auto" orderBy="sorts:desc,createDatetime:desc">
+                        <condition name="status" defaultValue="4" operation="eq" inputType="default"/>
+                    </query>
+                </do>
+                <do name="viewArtwork" access="" label="artwork列表"
+                    result="/artwork/artworkView">
+                    <query name="default" label="默认" type="auto" orderBy="sorts:desc,createDatetime:desc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+                <do name="viewInvestor" access="" label="artwork投资者列表"
+                    result="/artwork/ArtworkInvestorPList">
+                    <query name="default" label="默认" type="auto">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+                <do name="removeArtwork" access="" label="artwork列表"
+                    result="/artwork/ArtworkPList">
+                    <query name="default" label="默认" type="auto">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+
+
+
+
+
+
+
+
+
+    </entities>
+</module>

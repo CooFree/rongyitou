@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ni_ll_top"
+    android:background="@android:color/white">
+    <RelativeLayout
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.yxh.ryt.custemview.CircleImageView
+            android:id="@+id/ni_iv_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"/>
+        <LinearLayout
+            android:layout_toRightOf="@+id/ni_iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:id="@+id/ni_tv_content"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您投资的项目大师发表了新动态"
+                android:layout_marginBottom="10dp"
+                />
+            <TextView
+                android:id="@+id/ni_tv_date"
+                android:textSize="12sp"
+                android:textColor="#808080"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016-02-19  14:00"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增收货地址</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="shop2016/css/swiper.min.css?t=20160413">
+    <link rel="stylesheet" href="shop2016/css/layout.css?t=20160413">
+    <link rel="stylesheet" href="shop2016/css/aorder.css?t=20160413">
+
+</head>
+<body>
+<div class="tz2016" style="padding-bottom:51px" id="form">
+    <!--<form action="{{=getFormAction()}}" id="formBody">-->
+    <!--<div class="header ">-->
+    <!--<a href="" class="chevron chevron-left"></a>-->
+    <!--<h1>新增收货地址</h1>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;//End&#45;&#45;模块&#45;&#45;人物投资信息&ndash;&gt;-->
+    <!--<div class="site">-->
+    <!--<ul class="site-page">-->
+    <!--<li>-->
+    <!--<div class="site-title">收货人：</div>-->
+    <!--<input type="text" name="consignee" class="site-txt"/>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<div class="site-title">手机号：</div>-->
+    <!--<input type="text" name="phone" class="site-txt"/>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<div class="site-title">所在地区：</div>-->
+    <!--<input type="text" name="cityStr" class="site-txt"/>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<textarea class="site-box" name="details" placeholder="详细地址："></textarea>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--<div class="site-default">-->
+    <!--<div class="fl wb pleft">-->
+    <!--<div class="fl wb span">-->
+    <!--<label class="che-click" for="ch01"></label>-->
+    <!--<input type="checkbox" name="isDefault" id="ch01" class="checkbox">-->
+    <!--</div>-->
+    <!--<strong>默认地址</strong>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="chebtn">-->
+    <!--<a onclick="submitForm()" class="chevron-save" value="保存">保存</a>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;//End&#45;&#45;模块&#45;&#45;地址信息&ndash;&gt;-->
+    <!--</form>-->
+
+    <!--<form action="{{=getFormAction()}}" id="formBody">-->
+    <!--<div class="header ">-->
+    <!--<a href="" class="chevron chevron-left"></a>-->
+    <!--<h1>新增收货地址</h1>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;//End&#45;&#45;模块&#45;&#45;人物投资信息&ndash;&gt;-->
+    <!--<div class="site">-->
+    <!--<ul class="site-page">-->
+    <!--<li>-->
+    <!--<div class="site-title">收货人：</div>-->
+    <!--<input type="text" name="consignee" value="{{=it.consignee}}" class="site-txt"/>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<div class="site-title">手机号：</div>-->
+    <!--<input type="text" name="phone" value="{{=it.phone}}" class="site-txt"/>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<div class="site-title">所在地区：</div>-->
+    <!--<input type="text" name="cityStr" value="{{=it.cityStr}}" class="site-txt"/>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<textarea class="site-box" name="details" placeholder="详细地址：">{{=it.details}}</textarea>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--<div class="site-default">-->
+    <!--<div class="fl wb pleft">-->
+    <!--<div class="fl wb span">-->
+    <!--{{if(it.status=="1"){ }}-->
+    <!--<label class="che-click" for="ch01"></label>-->
+    <!--<input type="hidden" name="isDefault" id="ch01" value="1" class="checkbox">-->
+    <!--{{ } }}-->
+    <!--{{if(it.status=="2"){ }}-->
+    <!--<label class="che-click cur" for="ch01"></label>-->
+    <!--<input type="hidden" name="isDefault" id="ch01" value="2" class="checkbox">-->
+    <!--{{ } }}-->
+    <!--</div>-->
+    <!--<strong>默认地址</strong>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="chebtn">-->
+    <!--<a onclick="submitForm()" class="chevron-save" value="保存">保存</a>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;//End&#45;&#45;模块&#45;&#45;地址信息&ndash;&gt;-->
+    <!--</form>-->
+</div>
+<!--//End--底部下载app-->
+<script src="shop2016/js/jquery.min.js"></script>
+<script src="shop2016/js/jquery.md5.js"></script>
+<script src="shop2016/js/swiper.min.js"></script>
+<script src="shop2016/js/system.js"></script>
+<script src="shop2016/js/local/common.js"></script>
+<script>
+
+    function redirectByForm() {
+        console.log("redirectByForm");
+    }
+
+    var swiperContainerOption = {};
+
+
+    hostName = "http://localhost";                           //服务器域名
+    RequestUrl = {
+        addressView: "/app/addressView.do",
+        formAction: "/app/addAddress.do"
+    }//接口对象
+
+    var PageVariable = {};
+
+    $().ready(function () {
+        initPage();
+    })
+
+
+    function submitRemoveAddress(id) {
+        //发从remove请求，成功之后删除当前父节点
+        var success = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+            }, data, function () {
+                $("#" + id).remove();
+            }, function () {
+            });
+        }
+        var param = getParamObject();
+        param.addressId = id;
+        ajaxRequest(hostName + RequestUrl.removeAddress, param, success, function () {
+        }, "post");
+    }
+
+
+    function submitForm() {
+        var success = function (data) {
+            ajaxSuccessFunctionTemplage(function () {
+            }, data, function () {
+                redirectByForm()
+            }, function () {
+            });
+        }
+        var param = getParamObject();
+        var formParam = $('#formBody').serialize();
+        var formParamList = formParam.split("&");
+        for (var i = 0; i < formParamList.length; i++) {
+            var paramStr = formParamList[i];
+            param[paramStr.split("=")[0]] = paramStr.split("=")[1];
+        }
+        if (typeof PageVariable.param.addressId != "undefined" && PageVariable.param.addressId != null && PageVariable.param.addressId != "") {
+            param.id = PageVariable.param.addressId;
+        }
+        if (typeof param.isDefault == "undefined") {
+            param.status = "1";
+        } else if (param.isDefault == "on") {
+            param.status = "2";
+        }
+        param = dealRequestParam(param);
+        ajaxRequest(hostName + RequestUrl.formAction, param, success, function () {
+        }, "post");
+    }
+
+
+
+    function initPage(currentUserId, addressId) {
+        var param = new Object();
+        param.currentUserId = currentUserId;
+        param.addressId = addressId;
+        PageVariable.param = param;
+        PageVariable.param.addressId = "123123";
+        if (typeof PageVariable.param.addressId != "undefined" && PageVariable.param.addressId != null && PageVariable.param.addressId != "") {
+            getAddressEditData(getAddressEdit);
+        } else {
+            getAddressCreateData(getAddressCreate);
+        }
+    }
+
+
+    function getParamObject() {
+//        return {
+//            currentUserId: "imhfp1yr4636pj49",
+//            addressId: "123123"
+//        }
+        return PageVariable.param;
+    }              //从app中获取的服务端请求接口的必要参数  需要传递一个密钥参数
+    function getCurrentUserId() {
+        return getParamObject()["currentUserId"];
+    }            //获得当前用户的id     // 跳转到用户的个人主页
+
+
+    function redirectConfirm(orderId) {
+    }
+
+
+    function getAddressCreateData(callback) {
+        callback();
+    }
+
+    function getAddressEditData(callback) {
+        var success = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+                var obj = dataTemp;
+                PageVariable.consumerAddress = obj.consumerAddress;
+            }, data, callback, function () {
+            });
+        }
+        var param = getParamObject();
+        param = dealRequestParam(param);
+        ajaxRequest(hostName + RequestUrl.addressView, param, success, function () {
+        }, "post");
+    }
+
+    function getAddressEdit() {
+        $("#form").html(getAddressEditHtml(PageVariable.consumerAddress));
+        $('.che-click').on('click', function () {
+            if ($(this).hasClass('cur')) {
+                $(this).removeClass('cur')
+            } else {
+                $(this).addClass('cur')
+            }
+        });
+//        tabsHeight();
+    }
+
+    function getAddressCreate() {
+        $("#form").html(getAddressCreateHtml());
+        $('.che-click').on('click', function () {
+            if ($(this).hasClass('cur')) {
+                $(this).removeClass('cur')
+            } else {
+                $(this).addClass('cur')
+            }
+        });
+//        tabsHeight();
+    }
+
+
+    function getAddressEditHtml(it /**/) {
+        var out = ' <form action="' + (getFormAction()) + '" id="formBody"> <div class="header "> <a href="" class="chevron chevron-left"></a> <h1>新增收货地址</h1> </div> <!--//End--模块--人物投资信息--> <div class="site"> <ul class="site-page"> <li> <div class="site-title">收货人：</div> <input type="text" name="consignee" value="' + (it.consignee) + '" class="site-txt"/> </li> <li> <div class="site-title">手机号：</div> <input type="text" name="phone" value="' + (it.phone) + '" class="site-txt"/> </li> <li> <div class="site-title">所在地区：</div> <input type="text" name="cityStr" value="' + (it.cityStr) + '" class="site-txt"/> </li> <li> <textarea class="site-box" name="details" placeholder="详细地址：">' + (it.details) + '</textarea> </li> </ul> <div class="site-default"> <div class="fl wb pleft"> <div class="fl wb span"> ';
+        if (it.status == "1") {
+            out += ' <label class="che-click" for="ch01"></label> <input type="checkbox" name="isDefault" id="ch01"  class="checkbox"> ';
+        }
+        out += ' ';
+        if (it.status == "2") {
+            out += ' <label class="che-click cur" for="ch01"></label> <input type="checkbox" name="isDefault" checked id="ch01" class="checkbox"> ';
+        }
+        out += ' </div> <strong>默认地址</strong> </div> </div> </div> <div class="chebtn"> <a onclick="submitForm()" class="chevron-save" value="保存">保存</a> </div> <!--//End--模块--地址信息--> </form>';
+        return out;
+    }
+
+
+    function getAddressCreateHtml() {
+        var out = ' <form action="' + (getFormAction()) + '" id="formBody"> <div class="header "> <a href="" class="chevron chevron-left"></a> <h1>新增收货地址</h1> </div> <!--//End--模块--人物投资信息--> <div class="site"> <ul class="site-page"> <li> <div class="site-title">收货人：</div> <input type="text" name="consignee" class="site-txt"/> </li> <li> <div class="site-title">手机号：</div> <input type="text" name="phone" class="site-txt"/> </li> <li> <div class="site-title">所在地区：</div> <input type="text" name="cityStr" class="site-txt"/> </li> <li> <textarea class="site-box" name="details" placeholder="详细地址："></textarea> </li> </ul> <div class="site-default"> <div class="fl wb pleft"> <div class="fl wb span"> <label class="che-click" for="ch01"></label> <input type="checkbox" name="isDefault" id="ch01" class="checkbox"> </div> <strong>默认地址</strong> </div> </div> </div> <div class="chebtn"> <a onclick="submitForm()" class="chevron-save" value="保存">保存</a> </div> <!--//End--模块--地址信息--> </form>';
+        return out;
+    }
+
+    function getFormAction() {
+        return hostName + RequestUrl.formAction;
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+//
+//  PrefixHeader.pch
+//  融易投
+//
+//  Created by efeiyi on 16/3/31.
+//  Copyright © 2016年 dongxin. All rights reserved.
+//
+
+// OC文件
+#ifdef __OBJC__
+
+#import "HttpRequstTool.h"
+#import "MyMD5.h"
+
+#import "UIBarButtonItem+Item.h"
+#import "UIImage+Image.h"
+#import "UIView+Frame.h"
+#import "NSString+Extension.h"
+#import "GlobeConst.h"
+
+
+#import "UIImage+Antialias.h"
+#import "UIImageView+Header.h"
+
+#import "NSCalendar+Init.h"
+#import "NSDate+Interval.h"
+
+#import "UIImage+StrethImage.h"
+#import "NSString+DocumentPath.h"
+
+#import "RYTLoginManager.h"
+#import "UserMyModel.h"
+
+#import "MBProgressHUD+YXL.h"
+// 自定义Log
+#ifdef DEBUG
+// 调试阶段 DEBUG
+#define SSLog(...) NSLog(__VA_ARGS__);
+
+#else
+// 发布阶段
+#define SSLog(...)
+
+#endif
+
+#define SSFunc SSLog(@"%s",__func__);
+
+/*屏幕适配*/
+#define iPhone6 ([UIScreen mainScreen].bounds.size.height == 667)
+#define iPhone6P ([UIScreen mainScreen].bounds.size.height == 736)
+#define iPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
+#define iPhone4 ([UIScreen mainScreen].bounds.size.height == 480)
+/*屏幕适配*/
+
+
+
+
+#define SSScreenW [UIScreen mainScreen].bounds.size.width
+#define SSScreenH [UIScreen mainScreen].bounds.size.height
+
+#define SSWeakSelf __weak typeof(self) weakSelf = self
+
+#define SSColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+
+#define SSRandomColor SSColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+
+// 将数据写到桌面的plist
+#define SSWriteToPlist(data, filename) [data writeToFile:[NSString stringWithFormat:@"/Users/Desktop/%@.plist",filename] atomically:YES]
+// 将图片写到桌面
+#define SSWriteToImage(data, filename) [data writeToFile:[NSString stringWithFormat:@"/Users/Desktop/%@.png",filename] atomically:YES]
+// 将图片写到caches
+#define SSWriteImageToCaches(data, filename) [data writeToFile:[NSString stringWithFormat:@"%@.png",filename] atomically:YES]
+#define MD5key @"BL2QEuXUXNoGbNeHObD4EzlX+KuGc70U";
+
+#define API_BASE_URL(_URL_) [NSURL URLWithString:[@"http://j.efeiyi.com:8080/app-wikiServer/app/mobile.inf?" stringByAppendingString:_URL_]]
+
+#define MD5key @"BL2QEuXUXNoGbNeHObD4EzlX+KuGc70U";
+
+
+//使用偏好设置进行保存id
+//NSUserDefaults  是个单例,但是取出不是shared
+#define SaveUserID(userId) [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"userId"];
+
+#define TakeUserID  [[NSUserDefaults standardUserDefaults] objectForKey:@"userId"];
+
+#define TakeLoginUserModel [[RYTLoginManager shareInstance] takeUser];
+
+
+//使用归档进行用户登录信息
+//NSUserDefaults  是个单例,但是取出不是shared
+#define SaveUserInfo(userAccount) [[NSUserDefaults standardUserDefaults] setObject:userAccount forKey:@"userInfo"];
+
+#define TakeUserInfo [[NSUserDefaults standardUserDefaults] objectForKey:@"userInfo"];
+
+
+
+// 颜色
+#define HMColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+// 随机色
+#define HMRandomColor HMColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+
+// 全局背景色
+#define HMGlobalBg HMColor(211, 211, 211)
+
+// 是否为iOS7
+#define iOS7 ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
+
+// 是否为4inch
+#define FourInch ([UIScreen mainScreen].bounds.size.height == 568.0)
+
+// 导航栏标题的字体
+#define HMNavigationTitleFont [UIFont boldSystemFontOfSize:20]
+
+// 应用信息
+#define HMAppKey @"3141202626"
+#define HMAppSecret @"ee9de4d2431be061b22fe328332a5228"
+#define HMRedirectURI @"http://www.itheima.com"
+
+// 屏幕尺寸
+#define HMScreenW [UIScreen mainScreen].bounds.size.width
+
+// cell的计算参数
+// cell之间的间距
+#define HMStatusCellMargin 10
+
+// cell的内边距
+#define HMStatusCellInset 10
+
+// 原创微博昵称字体
+#define HMStatusOrginalNameFont [UIFont systemFontOfSize:13]
+// 原创微博时间字体
+#define HMStatusOrginalTimeFont [UIFont systemFontOfSize:11]
+// 原创微博来源字体
+#define HMStatusOrginalSourceFont HMStatusOrginalTimeFont
+// 原创微博正文字体
+#define HMStatusOrginalTextFont [UIFont systemFontOfSize:14]
+// 富文本字体
+#define HMStatusRichTextFont HMStatusOrginalTextFont
+
+// 转发微博昵称字体
+#define HMStatusRetweetedNameFont HMStatusOrginalNameFont
+// 转发微博正文字体
+#define HMStatusRetweetedTextFont HMStatusOrginalTextFont
+
+
+// 转发微博正文字体
+#define HMStatusHighTextColor HMColor(88, 161, 253)
+
+/** 表情相关 */
+// 表情的最大行数
+#define HMEmotionMaxRows 3
+// 表情的最大列数
+#define HMEmotionMaxCols 7
+// 每页最多显示多少个表情
+#define HMEmotionMaxCountPerPage (HMEmotionMaxRows * HMEmotionMaxCols - 1)
+
+// 通知
+// 表情选中的通知
+#define HMEmotionDidSelectedNotification @"HMEmotionDidSelectedNotification"
+// 点击删除按钮的通知
+#define HMEmotionDidDeletedNotification @"HMEmotionDidDeletedNotification"
+// 通知里面取出表情用的key
+#define HMSelectedEmotion @"HMSelectedEmotion"
+
+// 链接选中的通知
+#define HMLinkDidSelectedNotification @"HMLinkDidSelectedNotification"
+
+// 富文本里面出现的链接
+#define HMLinkText @"HMLinkText"
+
+#endif

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ali_all">
+    <include layout="@layout/common_listitem_auction" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+        <TextView
+            android:id="@+id/cli_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拍卖时间：3月10日 9:00--15:00"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/defult_font"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/cli_tv_current_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="起拍价：10000元"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/defult_font"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/cli_tv_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拍品得主：游客123"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/defult_font"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/cli_tv_chengjiao_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="成交价：10000元"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/defult_font"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/cli_tv_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拍卖次数：100次"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/defult_font"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E9E9E9"
+        />
+</LinearLayout>

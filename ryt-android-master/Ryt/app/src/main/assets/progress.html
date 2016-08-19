@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <title>创作详情</title>
+    <link href="scripts/css/semantic.min.css" rel="stylesheet">
+    <link href="scripts/css/layouts.css" rel="stylesheet">
+    <link href="scripts/css/auction.css" rel="stylesheet">
+</head>
+<body style="background:#fff!important">
+
+<article class="creation details-rz">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <section class="swiper-slide">
+                <div class="ui segment" id="mainPicture"></div>
+                <!--//End--主图片-->
+                <!-- 进度 -->
+                <div class="ui comments" id="dt"></div>
+                <!--//End 进度 -->
+            </section>
+        </div>
+    </div>
+
+</article>
+
+<!--项目名称-->
+<script type="text/x-dot-template" id="artWorkBaseInfoTitle">
+    {{=it.name}}
+</script>
+<!--进度主图片-->
+<script type="text/x-dot-template" id="artWorkProgressPicture">
+    <div class="bg-pic"></div>
+    <div class="name cff">{{=it.name}}</div>
+    <img class="ui centered image" src="{{=it.picture_url}}">
+</script>
+<!--项目主图片-->
+<script type="text/x-dot-template" id="artWorkProjectPicture">
+    <div class="bg-pic"></div>
+    <img class="ui centered image" src="{{=it.picture_url}}">
+</script>
+
+
+
+<!--项目简介-->
+<script type="text/x-dot-template" id="artWorkBrief">{{=it.brief}}</script>
+<!--大师头像-->
+<script type="text/x-dot-template" id="artWorkHeadUrl">
+    <a onclick="redirectUser('{{=it.masterId}}')"><img class="ui circular image" src="{{=it.headUrl}}!app-user-head"
+                                                       height="35" width="35" alt=""><i class="icons icon-v2"></i></a>
+</script>
+<!--大师简介-->
+<script type="text/x-dot-template" id="artWorkMasterTitle">{{=it.title}}</script>
+<!--大师作品总数-->
+<script type="text/x-dot-template" id="artWorkMasterWorkNum">{{=it.masterWorkNum}}</script>
+<!--粉丝总数-->
+<script type="text/x-dot-template" id="artWorkMasterFansNum">{{=it.fansNum}}</script>
+<!--用户评论-->
+<script type="text/x-dot-template" id="artWorkComment">
+    {{
+    for(var i = 0 ; i < it.commentList.length ; i++){
+    var comment = it.commentList[i];
+    }}
+    <li>
+        <!--头像-->
+        <a onclick="redirectUser('{{=comment.creator.id}}')"><img src="{{=comment.creator.pictureUrl}}" alt=""></a>
+        <!--内容-->
+        <div class="content">
+            <h5 class="bd t11">{{=comment.creator.name}}<i class="icons icon-v"></i></h5>
+            <h6 class="bd t7 c97">{{=getTimePre(comment.createDatetime)}}</h6>
+            {{ if( typeof comment.fatherComment != "undefined" && comment.fatherComment!=null){ }}
+            <p class="bd t11 c66 answer">回复<a class="c51">@{{=comment.fatherComment.creator.name}}</a>：<span>{{=comment.content}}</span>
+            </p>
+            {{ } else{ }}
+            <p class="bd t11 c66 answer" onclick="repeatComment('{{=comment.id}}','{{=comment.creator.name}}')">
+                {{=comment.content}}</p>
+            {{ } }}
+        </div>
+    </li>
+    {{ } }}
+</script>
+<!--项目详情-->
+<script type="text/x-dot-template" id="artWorkDetail">
+    <div class="bd case details-page ">
+        {{ for(var i=0;i < it.artworkAttachmentList.length;i++){ }}
+        <img class="bd mb7" src="{{=it.artworkAttachmentList[i].fileName}}" alt="">
+        {{ } }}
+
+        <p class="bd t14 c33 pl12 pr12">{{=it.description}}</p>
+    </div>
+
+    <div class="bd case details-page pl12 pr12">
+        <h5 class="t14 c00 bd c33">创作流程说明</h5>
+        <p class="mp bd t14 c33">{{=it.make_instru}}</p>
+    </div>
+
+    <div class="bd case details-page pl12 pr12">
+        <h5 class="t14 c00 bd c33">融资解惑</h5>
+        <div class="bd">
+            <div class="bd list">
+                <div class="issue">Q1.</div>
+                <div class="answer">
+                    <p>{{=it.financing_aq}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
+<!--多少天后截止&投资人数以及金额-->
+<script type="text/x-dot-template" id="artWorkDataInfo">
+    <div class="items">
+        <p class="circle"></p>
+        <p class="t10 c99">{{=getDayNums((new Date().getTime())-(it.investEndDatetime))}}天后截止</p>
+    </div>
+    <div class="items">
+        <div id="indicatorContainer"></div>
+        <!--<p class="circle"></p>-->
+        <p class="t10 c99">{{=it.artworkInvestsSize}}人投资 ¥{{=it.investsMoney}}/{{=it.investGoalMoney}}</p>
+    </div>
+</script>
+<!--进度-->
+<script type="text/x-dot-template" id="artWorkScheduleMessage">
+
+    {{
+    for(var k = 0 ; k < it.messageList.length ; k++){
+    var message = it.messageList[k];
+    }}
+    <div class="comment">
+        <div class="avatar">{{=getDayStr(it.auctionStartDatetime)}}<span class="t9">{{=getDateStr(it.investStartDatetime)}}</span>
+        </div>
+        <div class="content">
+            <span class="author">{{=message.content}}</span>
+            {{ if(message.artworkMessageAttachments.length > 1){ }}
+            <div class="text image">
+                {{for(var j = 0 ; j < message.artworkMessageAttachments.length ; j++){var attachments =
+                message.artworkMessageAttachments[j];}}
+                <div class="swiper-slide"><img src="{{=attachments.fileUri}}" alt=""></div>
+                {{ } }}
+            </div>
+            {{ }else{ }}
+            <div class="text">
+                {{for(var j = 0 ; j < message.artworkMessageAttachments.length ; j++){var attachments =
+                message.artworkMessageAttachments[j];}}
+                {{if(attachments.fileType == "0"){ }}
+                <div class="swiper-slide"><img src="{{=attachments.fileUri}}" width="105" alt=""></div>
+                {{ }else if(attachments.fileType == "1"){ }}
+                <video style="background: #000;width:100%" src="{{=attachments.fileUri}}" preload="preload"
+                       controls="controls" height="200"></video>
+                {{ } }}
+                {{ } }}
+            </div>
+            {{ } }}
+
+            <div class="actions">
+                <a class="date t9">{{=getTimePre(it.createDatetime)}}</a>
+                <a class="reply" href="">
+                    <i class="caret left icon"></i><i class="icon_reply"></i>
+                </a>
+                <div class="ui black tiny button divided horizontal list">
+                    <div class="layer" id="{{=message.id}}buttons">
+                        {{=getMessageButtons(message)}}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ui message">
+                {{ if(message.artWorkPraiseList.length > 0 || message.artworkCommentList.length > 0){ }}
+                <i class="caret up icon"></i>
+                {{ } }}
+                <!--点赞-->
+                <div class="ui feed">
+                        {{ if(message.artWorkPraiseList.length>0){ }}
+                         <div class="event" id="{{=message.id}}praiseIcon">
+                        {{ } else{ }}
+                        <div class="event" id="{{=message.id}}praiseIcon" style="display: none">
+                            {{ } }}
+                        <div class="label" >
+                            <i class="empty heart icon"></i>
+                        </div>
+                        <div class="content" id="{{=message.id}}praise">
+                            {{=getPraiseList(message)}}
+                        </div>
+                    </div>
+                </div>
+
+
+                {{ for (var i = 0 ; i < message.artworkCommentList.length ; i++) {
+                var comment = message.artworkCommentList[i];
+                }}
+
+                {{ if( typeof comment.fatherComment != "undefined" && comment.fatherComment!=null){ }}
+                    <div class="ui list" onclick="redirectComment('{{=getParamObject().artWorkId}}','{{=getParamObject().currentUserId}}','{{=message.id}}','{{=comment.id}}','{{=comment.creator.name}}')">
+                        <div class="item">
+                            <div class="content">
+                                <a onclick="redirectUser('{{=comment.creator.id}}')">
+                                    {{
+                                    if(comment.creator.id==getCurrentUserId()){
+                                    }}
+                                    {{=comment.creator.name}}
+                                    {{ } else{ }}
+                                    {{=comment.creator.name}}
+                                    {{ } }}
+                                </a>
+                                回复<a onclick="redirectUser('{{=comment.fatherComment.creator.id}}')">{{=comment.fatherComment.creator.name}}</a>
+                                <span onclick="submitComment('{{=comment.id}}','{{=message.id}}')">{{=comment.content}}</span>
+                            </div>
+                        </div>
+                    </div>
+                {{ }else{ }}
+                    <div class="ui list" onclick="redirectComment('{{=getParamObject().artWorkId}}','{{=getParamObject().currentUserId}}','{{=message.id}}','{{=comment.id}}','{{=comment.creator.name}}')">
+                        <div class="item">
+                            <div class="content">
+                                <a onclick="redirectUser('{{=comment.creator.id}}')">{{=comment.creator.name}}</a>：{{=comment.content}}
+                            </div>
+                        </div>
+                    </div>
+                {{ } }}
+
+                {{ } }}
+            </div>
+
+
+        </div>
+    </div>
+    {{ } }}
+</script>
+<!--投资记录-默认展示-->
+<script type="text/x-dot-template" id="artWorkInvestRecordList">
+    <ul>
+        {{ if(it.investList.length<5){ }}
+        {{
+        for (var i = 0 ; i< 5 ; i++) {
+        var investTemp = it.investList[i];
+        }}
+        <li>
+            <i class="icons num num1">1</i>
+            <div class="fl t11">
+                <span><img src="{{=investTemp.creator.pictureUrl}}" width="25" height="25" alt=""></span>
+                <span>{{=investTemp.creator.name}}</span>
+                <span class="c99">投资了</span>
+                <span>￥{{=parseInt(investTemp.price)}}</span>
+            </div>
+            <em>{{=getDateFormatStr(investTemp.createDatetime,"MM月dd日 hh:mm")}}</em>
+        </li>
+        {{ } }}
+        {{ }else{ }}
+        {{
+        for (var i = 0 ; i< 5 ; i++) {
+        var investTemp = it.investList[i];
+        }}
+        <li>
+            <i class="icons num num1">1</i>
+            <div class="fl t11">
+                <span><img src="{{=investTemp.creator.pictureUrl}}" width="25" height="25" alt=""></span>
+                <span>{{=investTemp.creator.name}}</span>
+                <span class="c99">投资了</span>
+                <span>￥{{=parseInt(investTemp.price)}}</span>
+            </div>
+            <em>{{=getDateFormatStr(investTemp.createDatetime,"MM月dd日 hh:mm")}}</em>
+        </li>
+        {{ } }}
+        <a href="javascript:void(0);" id="btn-mores" class="bd t10 c4c bor-top-f5 more">查看更多</a>
+        {{ } }}
+    </ul>
+</script>
+<!--投资记录-默认展示-->
+<script type="text/x-dot-template" id="artWorkInvestRecordListAll">
+    <ul>
+        {{
+        for (var i = 5 ; i< it.investList.length ; i++) {
+        var investTemp = it.investList[i];
+        }}
+        <li>
+            <i class="icons num num1">1</i>
+            <div class="fl t11">
+                <span><img src="{{=investTemp.creator.pictureUrl}}" width="25" height="25" alt=""></span>
+                <span>{{=investTemp.creator.name}}</span>
+                <span class="c99">投资了</span>
+                <span>￥{{=parseInt(investTemp.price)}}</span>
+            </div>
+            <em>{{=getDateFormatStr(investTemp.createDatetime,"MM月dd日 hh:mm")}}</em>
+        </li>
+        {{ } }}
+    </ul>
+</script>
+
+
+
+<!--点赞-->
+<script type="text/x-dot-template" id="messagePraise">
+
+    {{ for (var i = 0 ; i < it.artWorkPraiseList.length ; i++) {
+    var praise = it.artWorkPraiseList[i];
+    }}
+    <a onclick="redirectUser('{{=praise.user.id}}')">{{=praise.user.name}}</a><em>，</em>
+    {{ } }}
+
+</script>
+
+<script type="text/x-dot-template" id="messageButtons">
+    {{ if(!isPraised(it)){ }}
+    <div id="btn-praise" class="item" onclick="newArtWorkPraise('{{=it.id}}','1')"><i class="empty heart icon"></i>赞</div>
+    {{ }else{ }}
+    <div id="btn-praise2" class="item" onclick="newArtWorkPraise('{{=it.id}}','0')"><i class="heart icon"></i>取消</div>
+    {{ } }}
+    <div class="item" onclick="redirectComment('{{=getParamObject().artWorkId}}', '{{=getParamObject().currentUserId}}', '{{=it.id}}', '')"><i class="icons discuzz"></i>评论</div>
+</script>
+
+
+<script type="text/x-dot-template" id="artWorkMaster">
+    <div class="content">
+        <div class="thumb"><img src="{{=it.pictureUrl}}" height="35" width="35" alt=""><i
+                class="icons icon-v2"></i></div>
+        <div class="info">
+            <p class="bd"><span class="t10">{{=it.name}}</span><span class="c66">{{=it.master.title}}</span></p>
+            <p class="bd c99"><span id="masterArtWorkNum">{{=getArtWorkNum(it.id)}}件作品</span><span id="masterFansNum">{{=getFansNum(it.id)}}个粉丝</span>
+            </p>
+        </div>
+        {{ if(PageVariable.isFollow) { }}
+        <a href="#icon-add" class="button-add bor-all-ccc" title="" style="width: 50px;height: 30px;">已关注</i></a>
+        {{ }else{ }}
+        <a href="#icon-add" class="button-add bor-all-ccc" title=""
+           onclick="newArtFollowMasterData(checkArtFollowMaster)"><i class="icons icon-add"></i></a>
+        {{ } }}
+    </div>
+</script>
+<!--动态图片弹出框-->
+<div class="swiper-container swiper2" style="display: none;">
+    <div class="swiper-wrapper">
+
+    </div>
+    <div class="swiper-pagination">
+
+    </div>
+    <div class="overbg"></div>
+</div>
+
+
+<script src="scripts/js/jquery-3.1.0.min.js"></script>
+<script src="scripts/js/jquery.md5.js"></script>
+<script src="scripts/js/radialIndicator.js"></script>
+<script src="scripts/js/system.js"></script>
+<script src="scripts/js/local/doT.min.js"></script>
+<script src="scripts/js/local/common.js"></script>
+<script src="scripts/js/local/creation/app.js"></script>
+<script src="scripts/js/local/creation/model.js"></script>
+<script src="scripts/js/local/creation/controller.js"></script>
+
+<script>
+    $(function () {
+        initPage();
+        //解决进度页面高度问题
+        setTimeout(function () {
+            $('.header.swiper-menu .item span:first-child').trigger('click');
+        }, 1000);
+    });
+    //从app中获取的服务端请求接口的必要参数  需要传递一个密钥参数
+    //从app中获取当前用户id
+    function getCurrentUserId() {
+        return getParamObject()["currentUserId"];
+    }
+    function isPraised(message) {
+        var artWorkPraiseList = message.artWorkPraiseList;
+        var result = false;
+        for (var i = 0; i < artWorkPraiseList.length; i++) {
+            var artWorkPraise = artWorkPraiseList[i];
+            if (artWorkPraise.user.id == getParamObject().currentUserId) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+    function getArtWorkNum(id) {
+        window.artWorkNumSuccess = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+                var artWorkNum = dataTemp["artworkList"].length;
+                $("#masterArtWorkNum").html(artWorkNum + "件作品");
+            }, data);
+        }
+        var param = getParamObject();
+        param["masterId"] = id;
+        ajaxRequest(hostName + RequestUrl.artWorkNum, param, window.artWorkNumSuccess, function () {
+        }, "artWorkNumSuccess");
+        return 0;
+    }
+    function getFansNum(id) {
+        window.fansNumSuccess = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+                var fansNum = dataTemp["artUserFollowedList"].length;
+                $("#masterFansNum").html(fansNum + "个粉丝");
+            }, data);
+        }
+        var param = getParamObject();
+        param["masterId"] = id;
+        ajaxRequest(hostName + RequestUrl.masterFansNum, param, window.fansNumSuccess, function () {
+        }, "fansNumSuccess");
+        return 0;
+        return 0
+    }
+    function repeatComment(fatherCommentId, fatherCommentCreator) {
+        //1.拼写placeholder
+        var placeholder = "回复 @" + fatherCommentCreator + " : ";
+        //2.更新fatherCommentId
+        PageVariable.fatherCommentId = fatherCommentId;
+        $("#commentContent").attr("placeholder", placeholder).focus();
+
+    }
+
+    RequestUrl = {
+        investTab: "/app/investorArtWorkInvest.do",
+        commentTab: "/app/investorArtWorkComment.do",
+        artWorkViewTab: "/app/investorArtWorkView.do",
+        initPage: "/app/artWorkCreationView.do",
+        newArtWorkPraise: "/app/artworkPraise.do",
+        artFollowMasterList: "/app/followMasterList.do",
+        masterFansNum: "/app/fansNum.do",
+        artWorkNum: "/app/artWorkNum.do",
+        createComment: "/app/artworkComment.do"
+    }//接口对象
+
+</script>
+
+
+</body>
+</html>

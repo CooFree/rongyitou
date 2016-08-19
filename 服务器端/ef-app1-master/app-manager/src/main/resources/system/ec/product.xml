@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<module name="product" label="系统-产品" version="" package="com.efeiyi.ec.system.product" path="">
+
+    <entities>
+        <entity name="Product" label="产品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.Product">
+            <fields>
+                <field name="id" label="产品" inputType="text"/>
+                <field name="name" label="产品名字" inputType="text"/>
+                <field name="price" label="产品价格" inputType="text"/>
+                <field name="picture_url" label="产品图片链接" inputType="text"/>
+                <field name="createDatetime" label="创建时间" inputType="date"/>
+                <field name="master.id" label="用户" inputType="dialog_pop"/>
+                <field name="status" label="状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="上架" value="1"/>
+                        <item label="下架" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistProduct" access="" label="产品分页列表"
+                    result="/product/productPList" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial"  operation="like" label="产品编号" inputType="text"/>
+                        <condition name="project.name"  operation="eq" label="项目名称" inputType="text"/>
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    </query>
+
+
+                    <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                    <!--</query>-->
+                </do>
+                <do name="plistTENANTProduct" access="" label="产品分页列表"
+                    result="/product/productPList" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="status" operation="ne" label="状态" inputType="default" defaultValue="0"/>
+                        <condition name="name"  operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial"  operation="like" label="产品编号" inputType="text"/>
+                        <condition name="project.name"  operation="eq" label="项目名称" inputType="text"/>
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>
+                    </query>
+
+
+                    <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->
+                    <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                    <!--</query>-->
+                </do>
+                <do name="plistTProduct" access="" label="产品分页列表"
+                    result="/tenantProductTag/tenantProductPList" execute="com.efeiyi.ec.system.product.controller.plistTenantProductHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="serial" label="快速查询" type="auto" orderBy="serial:asc">
+                        <condition name="name"  operation="like" label="商品名称" inputType="text"  />
+
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq" inputType="default"/>
+                        <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
+                    </query>
+                </do>
+                <do name="saveOrUpdateProduct" label="保存附件" result="redirect:/basic/xm.do?qm=plistProduct_default">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+                <do name="plistProductwiki" access="" label="产品分页列表"
+                    result="/product/productPList2" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
+                <query name="getProduct2" label="默认" type="auto" orderBy="id:desc">
+                    <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    <condition name="project.id" operation="eq" defaultValue="0" label="项目"/>
+                </query>
+                </do>
+
+
+                <do name="plistProductTest" access="" label="产品分页列表"
+                    result="/test/generateTap" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="产品名称" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="eq" label="产品名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="产品编号" inputType="text"/>
+                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                    </query>
+                    <query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>
+                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                    </query>
+
+                    <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->
+                    <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                    <!--</query>-->
+                </do>
+
+
+                <do name="removeProduct" label="删除产品" access="" result="json"/>
+                <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.toFormProductHandler"/>
+                <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />
+                <do name="formProduct_ProductModel" label="保存产品页" access="" result="/productModel/productModelForm" execute="com.efeiyi.ec.system.product.controller.viewProductHandler" />
+                <do name="viewProduct" label="查看产品页" access="" result="/product/productView" execute="com.efeiyi.ec.system.product.controller.viewProductHandler" />
+                <!--<do name="saveOrUpdateProduct" label="保存产品" access="" result="/product/productSaveSuccess"></do>-->
+                <do name="listProduct" label="产品列表" access="" result="/product/productList">
+                    <query name="tenant" label="商家产品" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="0" operation="eq"/>
+                    </query>
+                    <query name="default" label="商家产品" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="0" operation="eq"/>
+                        <condition name="project.id" defaultValue="0" operation="eq"/>
+                    </query>
+                    <query name="default1" label="项目管理产品" type="auto" orderBy="id:desc">
+                        <condition label="status" name="status" defaultValue="1"  operation="eq"/>
+                        <condition label="project.id" name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
+
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品序列" name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <!--写两个list主要是为了不用一个列表页面，因为后台涉及到点击页面中的链接菜单选中的问题-->
+                <do name="listTenantProduct" label="产品列表" access="" result="/product/tenantProductList">
+                    <query name="tenant" label="商家产品" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="0" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <!--<entity name="ProductTest" label="产品列表"-->
+                <!--basic="simple" others=""-->
+                <!--model="com.efeiyi.ec.product.model.Product">-->
+            <!--<does>-->
+                <!--<do name="plistProductTest" access="" label="产品分页列表"-->
+                    <!--result="/test/generateTap" execute="com.efeiyi.ec.system.product.controller.listProductHandler">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>-->
+                        <!--&lt;!&ndash;<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>&ndash;&gt;-->
+                    <!--</query>-->
+                    <!--<query name="default1" label="产品名称" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="name"  operation="eq" label="产品名称" inputType="text"/>-->
+                        <!--<condition name="serial"  operation="eq" label="产品编号" inputType="text"/>-->
+                        <!--<condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>-->
+                    <!--</query>-->
+                    <!--<query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>-->
+                        <!--<condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>-->
+                    <!--</query>-->
+
+                    <!--&lt;!&ndash;<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<condition name="id" defaultValue="0" operation="ne"/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</query>&ndash;&gt;-->
+                <!--</do>-->
+
+            <!--</does>-->
+        <!--</entity>-->
+
+        <entity name="ProductModel" label="产品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.ProductModel">
+            <does>
+                <do name="plistProductModel" access="" label="产品分页列表"
+                    result="/productModel/productModelPList">
+                    <query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendIndex:desc">
+                        <condition name="status"  operation="ne" label="产品状态" defaultValue="0" inputType="default"/>
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="product.name" operation="likes" label="产品名称"/>
+                        <condition name="product.serial" operation="eq" label="产品编号"/>
+                        <condition name="product.project.name" operation="likes" label="项目"/>
+                        <condition name="product.project.projectCategory.id" operation="eq" label="分类" inputType="dialog_pop" key="category"/>
+                    </query>
+                </do>
+                <do name="plistTProductModel" access="" label="产品分页列表"
+                    result="/product/subjectProductModelPList" execute="com.efeiyi.ec.system.product.controller.PListTProductModelHandler">
+                    <query name="default" label="默认" type="auto" orderBy="serial:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <condition name="name" defaultValue="" operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial" defaultValue="" operation="like" label="产品编号" inputType="text"/>
+                    </query>
+
+                </do>
+                <do name="plistPCProductModel" access="" label="产品分页列表"
+                    result="/product/projectCategoryProductModelPList" execute="com.efeiyi.ec.system.product.controller.PListPCProductModelHandler">
+                    <query name="default" label="默认" type="auto" orderBy="serial:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <condition name="name" defaultValue="" operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial" defaultValue="" operation="like" label="产品编号" inputType="text"/>
+                    </query>
+                </do>
+                <do name="plistKCProductModel" access="" label="产品分页列表"
+                    result="/productModel/productModelKCPList" >
+                    <query name="default" label="默认" type="auto" orderBy="amount:asc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="amount:asc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <condition name="name" defaultValue="" operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial" defaultValue="" operation="like" label="产品编号" inputType="text"/>
+                    </query>
+                </do>
+                <do name="removeProductModel" label="删除产品" access="" result="json"/>
+                <do name="listProductModel" label="产品列表" access="" result="/productModel/productModelList">
+                    <query name="default4" label="默认规格" type="auto" orderBy="id:desc">
+                        <condition name="product.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="3" operation="eq"/>
+                    </query>
+                </do>
+                <do name="listProductModel" label="产品列表" access="" result="/productModel/productModelList">
+                    <query name="default5" label="默认规格" type="auto" orderBy="id:desc">
+                        <condition name="product.id" defaultValue="0" operation="eq"/>
+                    </query>
+                </do>
+                <do name="listMSProductModel" label="秒杀产品列表" access="" result="/productModel/productModelList">
+                    <query name="default" label="默认规格" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="ProductRecommended" label="推荐产品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.ProductRecommended">
+            <does>
+                <do name="plistProductRecommended" access="" label="推荐产品分页列表"
+                    result="/productRecommended/productRecommendedPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="group" defaultValue="productRecommended" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="saveOrUpdateProductRecommended" label="保存推荐产品" result="/test/generateTap">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"
+                                   inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+
+                <do name="removeProductRecommended" label="删除推荐产品" access="" result="json"/>
+                <do name="formProductRecommended" label="保存推荐产品页" access="" result="/productRecommended/productRecommendedForm"/>
+                <do name="listProductRecommended" label="推荐产品列表" access="" result="/productRecommended/productRecommendedList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="0" operation="ne"/>
+                    </query>
+
+                </do>
+
+            </does>
+        </entity>
+        <entity name="ProductDescription" label="产品描述列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.ProductDescription">
+            <fields>
+                <field name="id" label="产品描述id" inputType="text"/>
+                <field name="content" label="产品内容" inputType="text"/>
+            </fields>
+            <does>
+                <do name="plistProductDescription" access="" label="产品描述分页列表"
+                    result="/productDescription/productDescriptionPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="content" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="removeProductDescription" label="删除产品描述" access="" result="json"/>
+                <do name="formProductDescription" label="保存产品描述页" access=""
+                    result="/productDescription/productDescriptionForm"/>
+                <do name="saveOrUpdateProductDescription" label="保存产品描述" access=""
+                    result="/productDescription/productDescriptionSaveSuccess"/>
+                <do name="listProductDescription" label="产品描述列表" access=""
+                    result="/productDescription/productDescriptionList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+
+        <entity name="ProductPicture" label="产品图片"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.ProductPicture">
+            <does>
+                <do name="plistProductPicture" access="" label="产品图片分页列表"
+                    result="/productPicture/productPicturePList">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
+                        <condition name="content" defaultValue="1" operation="eq" />
+                    </query>
+                </do>
+                <do name="removeProductPicture" label="删除产品图片" access="" result="json"/>
+                <do name="formProductPicture" label="保存产品描述页" access="" result="/productPicture/productPicturenForm" />
+                <do name="saveOrUpdateProductPicture" label="保存产品描述" access="" result="/productPicture/productPictureSaveSuccess"
+                    execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />
+                <do name="listProductPicture" label="产品描述列表" access="" result="/productPicture/productPictureList">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
+                        <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="sort:asc">
+                        <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
+                        <condition label="productModel.id" name="productModel.id" defaultValue="1" operation="eq"/>
+                        <condition label="status" name="status" defaultValue="2" operation="eq"/>
+                    </query>
+
+                </do>
+
+            </does>
+        </entity>
+
+
+        <entity name="Subject" label="专题"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.Subject">
+            <fields>
+                <field name="show" label="状态" inputType="text">
+                    <statusType fieldName="show">
+                        <item label="上架" value="1"/>
+                        <item label="下架" value="2"/>
+                    </statusType>
+                </field>
+                <field name="type" label="类别" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="地区专题" value="dx"/>
+                        <item label="节日专题" value="jr"/>
+                        <item label="礼品专题" value="lp"/>
+                        <item label="品牌专题" value="pp"/>
+                        <item label="活动专题" value="hd"/>
+                    </statusType>
+                </field>
+                <field name="template" label="模板" inputType="text">
+                    <statusType fieldName="template">
+                        <item label="普通模板" value="1"/>
+                        <item label="活动模板" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistSubject" access="" label="专题分页列表"
+                    result="/subject/subjectPList">
+                    <query name="default" label="默认" type="auto" orderBy="subjectIndex:desc">
+                        <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="subjectIndex:desc">
+                        <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
+                        <condition  name="name" label="专题名称" operation="like" inputType="text"/>
+                        <condition name="type" operation="eq" label="专题类别" inputType="select_status" key="Subject.type"/>
+                        <condition name="template" operation="eq" label="模板" inputType="select_status" key="Subject.template"/>
+                    </query>
+                </do>
+                <do name="viewSubject" label="查看专题" access="" result="/subject/subjectView"/>
+                <do name="removeSubject" label="删除产品图片" access="" result="json"/>
+                <do name="formSubject" label="保存产品描述页" access="" result="/subject/subjectForm" />
+                <do name="formSubject_Description" label="保存产品描述页" access="" result="/subject/subjectDescriptionForm" />
+                <do name="saveOrUpdateSubject" label="保存产品描述" access="" result="/subject/subjectSaveSuccess"
+                    execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />
+                <do name="listSubject" label="产品描述列表" access="" result="/subject/subjectList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
+                        <condition label="status" name="status" defaultValue="2" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="SubjectProductModel" label="专题"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.SubjectProductModel">
+            <does>
+                <!--<do name="plistSubjectProduct" access="" label="专题产品分页列表"-->
+                    <!--result="/subject/subjectPList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="subjectIndex:desc">-->
+                        <!--<condition defaultValue="0" name="status" operation="ne" inputType="default"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+                <!--<do name="removeSubject" label="删除产品图片" access="" result="json"/>-->
+                <!--<do name="formSubject" label="保存产品描述页" access="" result="/subject/subjectForm" />-->
+                <!--<do name="formSubject_Description" label="保存产品描述页" access="" result="/subject/subjectDescriptionForm" />-->
+                <!--<do name="saveOrUpdateSubject" label="保存产品描述" access="" result="/subject/subjectSaveSuccess"-->
+                    <!--execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />-->
+                <do name="listSubjectProductModel" label="产品描述列表" access="" result="/subject/subjectProductModelList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="专题" name="subject.id" defaultValue="1" operation="eq"/>
+                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="专题" name="subject.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="ProjectCategoryProductModel" label="专题"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectCategoryProductModel">
+            <does>
+                <!--<do name="plistSubjectProduct" access="" label="专题产品分页列表"-->
+                <!--result="/subject/subjectPList">-->
+                <!--<query name="default" label="默认" type="auto" orderBy="subjectIndex:desc">-->
+                <!--<condition defaultValue="0" name="status" operation="ne" inputType="default"/>-->
+                <!--</query>-->
+                <!--</do>-->
+                <!--<do name="removeSubject" label="删除产品图片" access="" result="json"/>-->
+                <!--<do name="formSubject" label="保存产品描述页" access="" result="/subject/subjectForm" />-->
+                <!--<do name="formSubject_Description" label="保存产品描述页" access="" result="/subject/subjectDescriptionForm" />-->
+                <!--<do name="saveOrUpdateSubject" label="保存产品描述" access="" result="/subject/subjectSaveSuccess"-->
+                <!--execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />-->
+                <do name="listProjectCategoryProductModel" label="产品描述列表" access="" result="/projectCategory/projectCategoryProductModelList">
+                    <query name="default" label="默认" type="auto" orderBy="sort:desc">
+                        <condition label="专题" name="projectCategory.id" defaultValue="1" operation="eq"/>
+                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="sort:desc">
+                        <condition label="专题" name="projectCategory.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="ProductModelRecord" label="产品图片"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.ProductModelRecord">
+            <does>
+                <do name="plistProductModelRecord" access="" label="产品图片分页列表"
+                    result="/productModelRecord/productModelRecordPList"
+                       >
+                    <query name="default2" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default" />
+                        <condition name="productModel.id" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="createDateTime:desc">
+                        <condition name="productModel.id" defaultValue="1"  operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                        <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
+                    </query>
+                </do>
+                <do name="removeProductModelRecord" label="删除产品图片" access="" result="json"/>
+                <do name="formProductModelRecord" label="保存产品描述页" access="" result="/productModelRecord/productModelRecordForm" />
+                <do name="saveOrUpdateProductModelRecord" label="保存产品描述" access="" result="/productModelRecord/productModelRecordSaveSuccess"
+                    execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />
+                <do name="listProductModelRecord" label="产品描述列表" access="" result="/productModelRecord/productModelRecordList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
+                        <condition label="productModel.id" name="productModel.id" defaultValue="1" operation="eq"/>
+                        <condition label="status" name="status" defaultValue="2" operation="eq"/>
+                    </query>
+
+                </do>
+
+            </does>
+        </entity>
+        <entity name="Advertisement" label="产品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.Advertisement">
+            <fields>
+                <field name="group" label="分组" inputType="text">
+                    <statusType fieldName="group">
+                        <item label="营销活动" value="yxhd"/>
+                        <item label="热卖商品" value="rmsp"/>
+                        <item label="banner广告" value="bgg"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistAdvertisement" access="" label="产品分页列表"
+                    result="/advertisement/advertisementPList" >
+                    <query name="default" label="默认" type="auto" orderBy="adsOrder:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="adsOrder:desc">
+                        <condition name="name"  operation="like" label="广告名称" inputType="text"/>
+                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                        <condition name="groupName" operation="eq" label="类别" inputType="select_status" key="Advertisement.groupName"/>
+                    </query>
+                </do>
+                <do name="removeAdvertisement" label="删除广告" access="" result="json"/>
+                <do name="formAdvertisement" label="保存广告页" access="" result="/advertisement/advertisementForm" />
+                <do name="saveOrUpdateAdvertisement" label="保存产品描述" access="" result="/advertisement/advertisementSaveSuccess"
+                    execute="com.efeiyi.ec.system.advertisement.controller.AdvertisementFormHandler" />
+
+                <do name="listAdvertisement" label="保存产品描述" access="" result="/advertisement/advertisementSaveSuccess">
+                    <query name="default" label="快速查询" type="auto" orderBy="adsOrder:desc">
+                       <condition name="groupName"  operation="eq" defaultValue="1"  inputType="default"/>
+                       <condition name="status"  operation="eq" defaultValue="1"  inputType="default"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="PurchaseOrderComment" label="评价列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderComment">
+            <does>
+                <do name="plistPurchaseOrderComment" access="" label="评价分页列表"
+                    result="/purchaseOrderComment/purchaseOrderCommentPList" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="purchaseOrderProduct.purchaseOrder.serial"  operation="like" label="订单编号" inputType="text"/>
+                        <condition name="purchaseOrderProduct.productModel.name"  operation="like" label="产品名称" inputType="text"/>
+                        <condition name="purchaseOrderProduct.productModel.serial"  operation="like" label="产品编号" inputType="text"/>
+                        <condition name="status"  operation="ne" label="状态" defaultValue="0" inputType="default"/>
+                    </query>
+                </do>
+                <do name="removePurchaseOrderComment" label="删除评价" access="" result="json"/>
+                <do name="formPurchaseOrderComment" label="保存评价" access="" result="/purchaseOrderComment/purchaseOrderCommentForm" />
+                <do name="saveOrUpdatePurchaseOrderComment" label="保存产品描述" access="" result="/purchaseOrderComment/purchaseOrderCommentSaveSuccess"
+                   />
+            </does>
+        </entity>
+
+
+    </entities>
+</module>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="artUserFollowed" label="用户" version="" package="com.efeiyi.ec.art" path="">
+    <entities>
+        <entity name="ArtUserFollowed" label="user" basic="simple" others=""
+                model="com.efeiyi.ec.art.model.ArtUserFollowed">
+            <does>
+                <do name="plistArtUserFollowed" access="" label="用户详情" result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="follower.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="type" defaultValue="0" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+    </entities>
+</module>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<module name="artwork" label="artwork" version="" package="com.efeiyi.ec.art" path="">
+
+    <entities>
+        <entity name="Artwork" label="Artwork"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.Artwork">
+            <fields>
+                <field name="type" label="项目阶段" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="发起阶段" value="0"/>
+                        <item label="融资阶段" value="1"/>
+                        <item label="制作阶段" value="2"/>
+                        <item label="拍卖阶段" value="3"/>
+                        <item label="抽奖阶段" value="4"/>
+                        <item label="驳回" value="5"/>
+                    </statusType>
+                </field>
+                <field name="step" label="项目阶段状态" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="编辑阶段，尚未提交" value="100"/>
+                        <item label="融资待审核" value="10"/>
+                        <item label="融资审核中" value="11"/>
+                        <item label="融资审核通过" value="12"/>
+                        <item label="融资审核未通过，已驳回" value="13"/>
+                        <item label="融资中" value="14"/>
+                        <item label="融资完成" value="15"/>
+                        <item label="创作前" value="20"/>
+                        <item label="创作中" value="21"/>
+                        <item label="创作延时" value="22"/>
+                        <item label="创作完成待审核" value="23"/>
+                        <item label="创作完成审核中" value="24"/>
+                        <item label="创作完成被驳回" value="25"/>
+                        <item label="拍卖前" value="30"/>
+                        <item label="拍卖中" value="31"/>
+                        <item label="拍卖结束" value="32"/>
+                        <item label="流拍" value="33"/>
+                        <item label="待支付尾款" value="34"/>
+                        <item label="待发放" value="35"/>
+                        <item label="已发放" value="36"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistArtwork" access="" label="Artwork列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistArtwork" access="" label="Artwork列表"
+                    result="json">
+                    <query name="default1" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="author.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="listArtwork" access="" label="Artwork列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="author.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="listArtwork2" access="" label="Artwork列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="type" defaultValue="3" operation="eq"/>
+                        <condition name="step" defaultValue="31" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="ArtUserFollowed" label="ArtUserFollowed"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.ArtUserFollowed">
+            <does>
+                <do name="listArtUserFollowed" access="" label="ArtUserFollowed列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="follower.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="followed" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="user.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="Notification" label="通知"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.Notification">
+            <does>
+                <do name="lisNotification" access="" label="通知列表">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="targetUser.id" defaultValue="0" operation="eq"/>
+                        <condition name="isWatch" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="Message" label="私信"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.Message">
+            <does>
+                <do name="listMessage" access="" label="私信列表">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="targetUser.id" defaultValue="0" operation="eq"/>
+                        <condition name="isWatch" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="ArtworkComment" label="评论"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.ArtworkComment">
+            <does>
+                <do name="listArtworkComment" access="" label="评论列表">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="fatherComment.creator.id" defaultValue="0" operation="eq"/>
+                        <condition name="isWatch" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="ArtworkInvest" label="Artwork"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.ArtworkInvest">
+            <does>
+                <do name="plistArtworkInvest" access="" label="ArtworkInvest列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="listArtworkInvest" access="" label="ArtworkInvest列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="creator.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="listArtworkInvest1" access="" label="ArtworkInvest列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="price:desc">
+                        <condition name="artwork.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="InvestReward" label="Artwork"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.InvestReward">
+            <does>
+                <do name="plistInvestReward" access="" label="InvestReward列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="listInvestReward" access="" label="InvestReward列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="investUser.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="ArtWorkPraise" label="ArtWorkPraise"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.ArtWorkPraise">
+            <does>
+
+                <do name="listArtWorkPraise" access="" label="ArtWorkPraise列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="artwork.id" defaultValue="0" operation="eq"/>
+                        <condition name="user.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="ArtWorkMessage" label="Artwork"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.ArtworkMessage">
+            <does>
+                <do name="plistArtworkMessage" access="" label="ArtworkMessage列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="listArtworkMessage" access="" label="ArtworkMessage列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="artwork.id" defaultValue="0" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="ArtworkBidding" label="Artwork"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.ArtworkBidding">
+            <does>
+                <do name="plistArtworkBidding" access="" label="ArtworkBidding列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="listArtworkBidding" access="" label="ArtworkBidding列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
+                        <condition name="artwork.id" defaultValue="0" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="Account" label="Account"
+                basic="simple" others=""
+                model="com.efeiyi.ec.art.model.Account">
+            <does>
+                <do name="listAccount" access="" label="Account列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="user.id" defaultValue="0" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+    </entities>
+</module>

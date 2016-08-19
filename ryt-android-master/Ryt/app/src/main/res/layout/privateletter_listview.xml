@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <RelativeLayout
+        android:id="@+id/pl_rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/pl_ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back"
+            />
+        <TextView
+            android:id="@+id/pl_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="私信"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E9E9E9"/>
+
+        <com.yxh.ryt.custemview.AutoListView
+            android:id="@+id/pl_message_listView"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:scrollbars="none"
+            android:listSelector="@null"
+            android:layout_height="match_parent"
+            />
+
+</LinearLayout>

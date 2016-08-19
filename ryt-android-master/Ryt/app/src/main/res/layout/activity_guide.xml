@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_guide_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></android.support.v4.view.ViewPager>
+
+
+        <TextView
+            android:id="@+id/tv_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="51dp"
+            android:text="直接进入"
+            android:textSize="16sp"
+            android:textColor="#999999"
+            android:visibility="invisible"
+            android:drawableRight="@drawable/guide_arrow"
+            />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="90dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_guide_regist"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:text="注册"
+            android:padding="12dp"
+            android:background="@drawable/guide_button2_shape"
+            android:textColor="#FFFFFF"
+            android:visibility="invisible"
+            android:layout_marginLeft="50dp"
+            />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_guide_login"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:text="登录"
+            android:padding="14dp"
+            android:background="@drawable/guide_button1_shape"
+            android:textColor="#FFFFFF"
+            android:visibility="invisible"
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="51dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

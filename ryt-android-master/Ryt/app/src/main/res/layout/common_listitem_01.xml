@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.yxh.ryt.custemview.ScaleScreenImageView
+            android:id="@+id/cl_01_tv_prc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#33000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="100dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/cl_01_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="逐鹿顺意铜雕"
+                android:textColor="#FEFEFE"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/cl_01_tv_brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿什么和哈哈哈顺意铜雕逐鹿顺意铜雕顺意逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕顺意"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:ellipsize="end"
+                android:maxLines="2"
+            />
+        </LinearLayout>
+    </FrameLayout>
+    <TextView
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="14dp">
+
+        <com.yxh.ryt.custemview.CircleImageView
+            android:id="@+id/cl_01_civ_headPortrait"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/cl_01_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="朱炳仁"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/cl_01_ll_zhicheng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="#E9E9E9"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/cl_01_tv_zhicheng"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="铜雕技艺国家级传承人"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+   <!-- <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp">
+        <com.yxh.ryt.custemview.CircleImageView
+            android:id="@+id/cl_headPortrait"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_launcher"
+            />
+        <ImageView
+            android:id="@+id/iv_master"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/head_v"
+            android:layout_alignBottom="@+id/cl_headPortrait"
+            android:layout_alignRight="@+id/cl_headPortrait"
+            android:visibility="invisible"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/cl_headPortrait">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="5dp"
+                >
+                <TextView
+                    android:id="@+id/tv_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/defult_font"
+                    android:text="朱炳仁"
+                    android:textColor="@android:color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="@dimen/little_font"
+                    android:text="铜雕技艺国家级传承人"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/tv_name2"
+                    android:textColor="#808080"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="5dp"
+                >
+                <TextView
+                    android:id="@+id/tv_num_works"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/little_font"
+                    android:text="51件作品"
+                    android:textColor="#808080"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/little_font"
+                    android:text="416个粉丝"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/tv_num_works"
+                    android:textColor="#808080"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/ib_attention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/weiguanzhu"
+            android:background="@drawable/praise_shape"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>-->
+</LinearLayout>

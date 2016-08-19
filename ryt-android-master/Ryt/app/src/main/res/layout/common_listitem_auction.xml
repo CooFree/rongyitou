@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="242dp">
+
+        <com.yxh.ryt.custemview.ScaleScreenImageView
+            android:id="@+id/cl_01_tv_prc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#33000000" />
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:id="@+id/cl_01_iv_auction"
+            android:layout_width="68dp"
+            android:layout_height="28dp"
+            android:src="@mipmap/paimaizhuangtai_paimaiyugao"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="140dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cl_01_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="逐鹿顺意铜雕"
+                android:textColor="#FEFEFE"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/cl_01_tv_brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿什么和哈哈哈顺意铜雕逐鹿顺意铜雕顺意逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕逐鹿顺意铜雕顺意"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:ellipsize="end"
+                android:maxLines="2"
+            />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="14dp">
+
+        <com.yxh.ryt.custemview.CircleImageView
+            android:id="@+id/cl_01_civ_headPortrait"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/cl_01_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="朱炳仁"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/cl_01_ll_zhicheng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="#E9E9E9"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/cl_01_tv_zhicheng"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="铜雕技艺国家级传承人"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

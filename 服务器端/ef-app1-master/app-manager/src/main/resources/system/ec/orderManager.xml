@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="orderManager" label="orderManager" version="" package="com.efeiyi.ec.art.model" path="">
+    <entities>
+        <entity name="ArtworkBidding" label="ArtworkBidding" basic="simple" others="" model="com.efeiyi.ec.art.model.ArtworkBidding">
+            <fields>
+                <field name="type" label="订单状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="删除" value="0"/>
+                        <item label="已发放" value="1"/>
+                        <item label="已完成" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistArtworkBidding" access="" label="artwork列表" result="/artworkBidding/artworkBiddingPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="MarginAccount" label="MarginAccount" basic="simple" others="" model="com.efeiyi.ec.art.model.MarginAccount">
+            <fields>
+                <field name="status" label="保证金状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="已冻结" value="0"/>
+                        <item label="已使用" value="1"/>
+                        <item label="已解冻" value="3"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistMarginAccount" access="" label="artwork列表" result="/marginAccount/marginAccountPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <!--<condition name="status" defaultValue="0" operation="ne" inputType="default"/>-->
+                        <condition name="id" defaultValue="" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+    </entities>
+</module>

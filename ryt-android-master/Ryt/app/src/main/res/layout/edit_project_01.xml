@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/ib_top_lf"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@mipmap/back"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_top_ct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="编辑项目"
+            android:textColor="#333333"
+            android:textSize="@dimen/title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#E9E9E9"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/defult_font"
+                    android:text="项目标题：" />
+
+                <EditText
+                    android:id="@+id/ev_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/new_project_biankuang" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#E9E9E9"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/defult_font"
+                    android:text="项目简介：" />
+
+                <EditText
+                    android:id="@+id/ev_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/new_project_biankuang"
+                    android:gravity="left"
+                    android:textSize="@dimen/title"
+                    android:hint="输入项目简介，100字以内" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#E9E9E9"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/defult_font"
+                    android:text="目标金额：" />
+
+                <EditText
+                    android:id="@+id/ev_menoy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:background="@drawable/new_project_biankuang"
+                    android:hint="输入融资金额，不低于100元"
+                    android:textSize="@dimen/title"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#E9E9E9"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/defult_font"
+                    android:text="创作时长：" />
+
+                <EditText
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:id="@+id/ev_duration"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/new_project_biankuang"
+                    android:textSize="@dimen/title"
+                    android:text="30" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#E9E9E9"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请上传项目的效果图或参考图："
+                    android:textSize="@dimen/defult_font"/>
+
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:background="@drawable/image_biankuang"
+                    android:layout_width="match_parent"
+                    android:layout_height="224dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="center"
+                    android:src="@mipmap/ic_launcher" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="25dp"
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@mipmap/anniu_kedianji"
+                android:gravity="center"
+                android:text="下一步"
+                android:layout_marginBottom="20dp"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/defult_font" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

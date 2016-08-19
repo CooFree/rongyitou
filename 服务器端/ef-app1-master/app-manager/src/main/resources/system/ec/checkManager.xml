@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="checkManager" label="checkManager" version="" package="com.efeiyi.ec.art.model" path="">
+    <entities>
+        <entity name="Artwork" label="checkProject" basic="simple" others="" model="com.efeiyi.ec.art.model.Artwork">
+            <fields>
+                <field name="status" label="项目阶段" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="删除" value="0"/>
+                        <item label="融资阶段" value="1"/>
+                        <item label="制作阶段" value="2"/>
+                        <item label="拍卖阶段" value="3"/>
+                        <item label="抽奖阶段" value="4"/>
+                    </statusType>
+                </field>
+                <field name="step" label="项目阶段状态" inputType="text">
+                    <statusType fieldName="step">
+                        <item label="待审核" value="10"/>
+                        <item label="审核中" value="11"/>
+                        <item label="审核通过" value="12"/>
+                        <item label="审核未通过，已驳回" value="13"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistCheckArtwork" access="" label="项目列表" result="/checkProject/checkProjectPList">
+                    <query name="checkDefault" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="step" defaultValue="10,11,12,13" operation="in" inputType="default"/>
+                    </query>
+                </do>
+                <do name="viewCheckArtwork" label="查看项目详情" access="" result="/checkProject/checkProjectView"/>
+            </does>
+        </entity>
+
+        <entity name="Artist" label="CheckMaster" basic="simple" others="" model="com.efeiyi.ec.art.model.Master">
+            <fields>
+                <field name="status" label="艺术家状态" inputType="text">
+                    <statusType fieldName="theStatus">
+                        <item label="删除" value="0"/>
+                        <item label="待审核" value="1"/>
+                        <item label="审核中" value="2"/>
+                        <item label="审核通过" value="3"/>
+                        <item label="审核未通过，已驳回" value="4"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistCheckMaster" access="" label="艺术家列表" result="/checkArtist/checkArtistPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="theStatus" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+                <do name="viewCheckMaster" label="查看艺术家详情" access="" result="/checkArtist/checkArtistView"/>
+            </does>
+            <does>
+                <do name="plistMaster" access="" label="艺术家列表" result="/user/artistPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="theStatus" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+                <do name="viewMaster" label="查看艺术家详情" access="" result="/user/artistView"/>
+            </does>
+        </entity>
+    </entities>
+</module>

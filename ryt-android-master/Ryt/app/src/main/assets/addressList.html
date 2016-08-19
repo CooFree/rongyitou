@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收货地址列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="shop2016/css/swiper.min.css?t=20160413">
+    <link rel="stylesheet" href="shop2016/css/layout.css?t=20160413">
+    <link rel="stylesheet" href="shop2016/css/aorder.css?t=20160413">
+
+</head>
+<body>
+<div class="tz2016" style="padding-bottom:51px">
+    <form action="">
+        <!--<div class="header ">-->
+            <!--<a href="" class="chevron chevron-left"></a>-->
+            <!--<h1>管理收货地址</h1>-->
+        <!--</div>-->
+        <!--//End--模块--人物投资信息-->
+        <div class="site">
+            <ul class="site-list" id="addressList">
+                <!--{{for(var i = 0 ; i < it.length ; i++){ }}-->
+                <!--<li id="{{=it[i].id}}">-->
+                <!--<a onclick="redirectConfirm('{{=it[i].id}}')"></a>-->
+                <!--<div class="site-head">-->
+                <!--<span>{{=it[i].consignee}}</span>-->
+                <!--<span>{{=it[i].phone}}</span>-->
+                <!--</div>-->
+                <!--<div class="site-content">{{=it[i].cityStr+it[i].details}}</div>-->
+                <!--<div class="site-default">-->
+                <!--<div class="s-btn">-->
+                <!--<a onclick="submitRemoveAddress('{{=it[i].id}}')" class="site-btn">删除</a>-->
+                <!--<a onclick="redirectEditAddress('{{=it[i].id}}')" class="site-btn">编辑</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--{{ } }}-->
+            </ul>
+            <div class="chebtn">
+                <a onclick="redirectFormAddress()" class="chevron-save">添加地址</a>
+            </div>
+        </div>
+        <!--//End--模块--地址信息-->
+    </form>
+</div>
+<!--//End--底部下载app-->
+<script src="shop2016/js/jquery.min.js"></script>
+<script src="shop2016/js/jquery.md5.js"></script>
+<script src="shop2016/js/swiper.min.js"></script>
+<script src="shop2016/js/system.js"></script>
+<script src="shop2016/js/local/common.js"></script>
+<script>
+
+
+    //    选择当前的地址作为新的地址
+    function redirectConfirm(orderId) {
+        //@TODO 设置默认地址 请求成功之后执行跳转操作
+    }
+
+    //编辑
+    function redirectEditAddress(id) {
+
+    }
+    //新建
+    function redirectFormAddress() {
+
+    }
+
+    var swiperContainerOption = {};
+
+
+    hostName = "http://localhost";                           //服务器域名
+    RequestUrl = {
+        addressList: "/app/listAddress.do",
+        removeAddress: "/app/removeAddress.do"
+    }//接口对象
+
+    var PageVariable = {};
+
+    $().ready(function () {
+        initPage();
+    })
+
+
+    function submitRemoveAddress(id) {
+        //发从remove请求，成功之后删除当前父节点
+        var success = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+            }, data, function () {
+                $("#" + id).remove();
+            }, function () {
+            });
+        }
+        var param = getParamObject();
+        param.addressId = id;
+        param = dealRequestParam(param);
+        ajaxRequest(hostName + RequestUrl.removeAddress, param, success, function () {
+        }, "post");
+    }
+
+
+    function initPage(currentUserId, signmsg, timestamp) {
+        var param = new Object();
+        param.currentUserId = currentUserId;
+        PageVariable.param = param;
+        getAddressListData(getAddressList);
+    }
+
+
+    function getParamObject() {
+//        return {
+//            currentUserId: "imhfp1yr4636pj49",
+//            artWorkId: "qydeyugqqiugd2",
+//        }
+        return PageVariable.param;
+    }              //从app中获取的服务端请求接口的必要参数  需要传递一个密钥参数
+    function getCurrentUserId() {
+        return getParamObject()["currentUserId"];
+    }            //获得当前用户的id     // 跳转到用户的个人主页
+
+
+    function getAddressListData(callback) {
+        var success = function (data) {
+            ajaxSuccessFunctionTemplage(function (dataTemp) {
+                var obj = dataTemp;
+                PageVariable.consumerAddressList = obj.consumerAddressList;
+            }, data, callback, function () {
+            });
+        }
+        var param = getParamObject();
+        param = dealRequestParam(param);
+        ajaxRequest(hostName + RequestUrl.addressList, param, success, function () {
+        }, "post");
+    }
+
+    function getAddressList() {
+        $("#addressList").html(getAddressListHtml(PageVariable.consumerAddressList));
+        tabsHeight();
+    }
+
+
+    function getAddressListHtml(it /**/) {
+        var out = ' ';
+        for (var i = 0; i < it.length; i++) {
+            out += ' <li id="' + (it[i].id) + '"> <a onclick="redirectConfirm(\'' + (it[i].id) + '\')"></a> <div class="site-head"> <span>' + (it[i].consignee) + '</span> <span>' + (it[i].phone) + '</span> </div> <div class="site-content">' + (it[i].cityStr + it[i].details) + '</div> <div class="site-default"> <div class="s-btn"> <a onclick="submitRemoveAddress(\'' + (it[i].id) + '\')" class="site-btn">删除</a> <a onclick="redirectEditAddress(\'' + (it[i].id) + '\')" class="site-btn">编辑</a> </div> </div> </li> ';
+        }
+        return out;
+    }
+
+</script>
+</body>
+</html>

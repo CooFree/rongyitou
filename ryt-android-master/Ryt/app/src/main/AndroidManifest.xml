@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yxh.ryt">
+
+    <uses-sdk android:minSdkVersion="16" />
+
+    <permission
+        android:name="com.yxh.ryt.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="com.yxh.ryt.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <!-- Optional for location -->
+    <uses-feature android:name="android.hardware.camera"/>
+    <!-- SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 阅读消息 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 写入消息 -->
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <!-- 接收消息 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".AppApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ryt_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
+            >
+           <!-- android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden">-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.IndexActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyProjectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CropActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.LotterySummaryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CommentListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.InvestorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CreateSummaryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AttentionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity
+            android:name=".activity.UserYiJianActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HeadImageActivity"
+            android:theme="@style/DialogActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CommitDepositPriceActivity"
+            android:theme="@android:style/Theme.Translucent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.InvestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserSettingAboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserChongZhiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserQianBaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.CommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ProjectCommentReply"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PublicBriefActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ForgetPwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PushWoraActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.PublicDongtaiImageActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.GuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserPtIndexActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserEditZiLiaoActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".activity.UserYsjIndexActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.ChuangZuoXQActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RongZiXQActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegisterScActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.CreateSuccessActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.EditSignActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CustomMsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Gallery02Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Gallery03Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Gallery04Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GalleryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PrivateLetterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PublicProject01Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.EditProject01Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.EditProject02Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.PublicProject02Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.ShowMsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RecordVedioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ReleaseVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RecordVedioFullActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.yxh.ryt" />
+            </intent-filter>
+        </activity>
+        <!-- Required  SDK核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- Required SDK 核心功能 -->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+
+                <category android:name="com.yxh.ryt" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <!-- Required  显示通知栏 -->
+                <category android:name="com.yxh.ryt" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name=".receiver.MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.yxh.ryt" />
+            </intent-filter>
+        </receiver>
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="a0418571f14a2f13b7794bcc" />
+        <!-- </>值来自开发者平台取得的AppKey -->
+
+        <activity android:name=".activity.EditNicknameActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.EditBriefActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.FansActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.YsjRzActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name=".activity.PayPageActivity"
+            android:label="@string/title_activity_pay_page" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ReceiverAdressActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.NewAddressActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AuctionSummaryActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.UserProtocolActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AuctionOrderActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AuctionOrderSummaryActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AuctionProtocolActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.WalletDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.CollectMoneyActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ArtistIndexActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ArtistCooperateProtocolActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.FinanceSummaryActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|navigation"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.EditRecAddressActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.UserIndexActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PraiseListActivity" android:screenOrientation="portrait"/>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+    <com.yxh.ryt.custemview.CircleImageView
+        android:id="@+id/pdctci_iv_icon"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="14dp"
+        android:src="@mipmap/ic_launcher" />
+    <LinearLayout
+        android:layout_toRightOf="@+id/pdctci_iv_icon"
+        android:layout_marginTop="10dp"
+        android:id="@+id/pdctci_ll_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+k
+        <LinearLayout
+            android:id="@+id/pdctci_ll_common"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pdctci_tv_nickName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:text="屌丝用户"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/defult_font" />
+
+            <ImageView
+                android:id="@+id/iv_master"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:src="@mipmap/head_v" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/pdctci_tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016-01-01 16:58"
+            android:textColor="#808080"
+            android:textSize="@dimen/little_font"
+
+            />
+
+        <TextView
+            android:id="@+id/pdctci_tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="15dp"
+            android:text="回复艺术人生:我支持你的观点"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+</RelativeLayout>

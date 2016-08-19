@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/flz_ll_top">
+    <TextView
+        android:id="@+id/flz_tv_noData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="还没有投过任何项目"
+        android:gravity="center"
+        android:layout_marginTop="350dp"
+        />
+    <wuhj.com.mylibrary.PlaceHoderHeaderLayout
+        android:layout_width="match_parent"
+        android:id="@+id/v_placehoder"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/fiz_lstv"
+            android:scrollbars="none"
+            android:padding="14dp"
+            android:divider="#00000000"
+            android:dividerHeight="0dip"
+            android:listSelector="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </wuhj.com.mylibrary.PlaceHoderHeaderLayout>
+</LinearLayout>

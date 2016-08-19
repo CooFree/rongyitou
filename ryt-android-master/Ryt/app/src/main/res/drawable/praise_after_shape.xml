@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 按钮弧度-->
+    <corners android:radius="3dp"/>
+
+    <!-- 颜色-->
+    <solid android:color="#CD3738"></solid>
+    <stroke android:color="#CD3738"
+        android:width="1dp"></stroke>
+    <padding
+        android:left="9dp"
+        android:top="5dp"
+        android:right="9dp"
+        android:bottom="5dp"/>
+</shape>

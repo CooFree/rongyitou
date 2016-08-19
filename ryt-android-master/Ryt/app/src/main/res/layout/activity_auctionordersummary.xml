@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <ImageView
+            android:id="@+id/aaos_ib_back"
+            android:layout_width="wrap_content"
+            android:background="@null"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/zhuce_fanhui"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/rg_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="订单详情"
+            android:textSize="@dimen/title"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+    <View
+        android:id="@+id/rg_line"
+        android:layout_below="@id/rg_rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E9E9E9"/>
+    <View
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/rg_rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E9E9E9"/>
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/aaos_wb_all"
+        />
+
+</LinearLayout>

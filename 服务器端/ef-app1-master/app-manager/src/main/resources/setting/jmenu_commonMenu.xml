@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmenu id="commonMenu">
+
+    <jnode id="ProjectManager" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="项目管理" url="/main.do?jnodeId=ProjectManager"  state="">
+        <jnode url="" id="projectManager" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="项目管理">
+            <jnode url="/basic/xm.do?qm=plistArtwork_default&amp;viewIdentify=projectManager&amp;viewArtWork=project" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="项目列表">
+
+
+            </jnode>
+
+
+        </jnode>
+
+    </jnode>
+    <jnode id="OrderManager" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="订单管理" url="/main.do?jnodeId=OrderManager"  state="">
+        <jnode url="" id="orderManager" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="订单管理">
+            <jnode url="/basic/xm.do?qm=plistArtworkBidding_default&amp;artworkBidding=artworkBidding" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="订单列表">
+                <match url="/basic/xm.do?qm=plistArtworkBidding_default&amp;artworkBidding=artworkBidding"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistMarginAccount_default&amp;marginAccount=marginAccount" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="保证金列表">
+                <match url="/basic/xm.do?qm=plistMarginAccount_default&amp;marginAccount=marginAccount"/>
+            </jnode>
+            <jnode url="" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="充值列表">
+                <!--<match url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;viewIdentify=orderProduct&amp;viewProductModel=order"/>-->
+            </jnode>
+        </jnode>
+    </jnode>
+    <jnode id="CheckManager" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="审核管理" url="/main.do?jnodeId=CheckManager"  state="">
+        <jnode url="" id="checkManager" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="审核管理">
+            <jnode url="/basic/xm.do?qm=plistCheckArtwork_checkDefault&amp;checkProject=checkProject" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="项目审核">
+                <match url="/basic/xm.do?qm=plistArtwork_checkDefault&amp;checkProject=checkProject"/>
+                <match url="/basic/xm.do?qm=viewCheckArtwork&amp;checkProject=checkProject"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistCheckMaster_checkDefault&amp;checkMaster=checkMaster" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="艺术家审核">
+                <match url="/basic/xm.do?qm=plistCheckMaster_checkDefault&amp;checkMaster=checkMaster"/>
+                <match url="/basic/xm.do?qm=viewCheckMaster&amp;checkMaster=checkMaster"/>
+            </jnode>
+        </jnode>
+    </jnode>
+    <jnode id="UserManager" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="用户管理" url="/main.do?jnodeId=UserManager"  state="">
+        <jnode url="" id="userManager" access="admin,operational,o_operational,financial,product_manager,market" state="closed" text_zh_CN="用户管理">
+            <jnode url="/basic/xm.do?qm=plistMaster_default&amp;CheckMaster=CheckMaster" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="艺术家列表">
+                <match url="/basic/xm.do?qm=plistMaster"/>
+                <match url="/basic/xm.do?qm=viewMaster"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistUser_default&amp;User=User" access="admin,operational,o_operational,financial,product_manager,market" text_zh_CN="用户列表">
+                <match url="/basic/xm.do?qm=plistUser"/>
+                <match url="/basic/xm.do?qm=viewUser"/>
+            </jnode>
+        </jnode>
+    </jnode>
+
+
+
+
+</jmenu>
+
+
+
+
+
+
